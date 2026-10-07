@@ -28,7 +28,7 @@ The repository includes [`netlify.toml`](file:///d:/10q%20challenge%20website%20
 2. **Connect to Netlify**:
    - Go to [https://app.netlify.com/](https://app.netlify.com/)
    - Click **"Add new site"** &rarr; **"Import an existing project"**
-   - Select **GitHub** and choose your repository: `riteshkumarcode/10q-Challenge`
+   - Select **GitHub** and choose your repository: `riteshkumarcode/10q-challenge-new-site`
    - Netlify will automatically detect the settings from [`netlify.toml`](file:///d:/10q%20challenge%20website%20new%20and%20final%20by%20ritesh/netlify.toml):
      - **Base directory**: `frontend`
      - **Build command**: `npm run build`
