@@ -4,23 +4,69 @@ export type CourseCategory =
   | 'MENTORSHIP'
   | 'FULL_COURSE';
 
+export type ContentType = 'VIDEO' | 'DOCUMENT' | 'TEST_PAPER';
+
+export interface CourseDocument {
+  id: number;
+  chapterId?: number;
+  title: string;
+  pdfUrl: string;
+  fileSizeBytes?: string;
+  pageCount?: number;
+  description?: string;
+}
+
+export interface ChapterTestPaper {
+  id: number;
+  chapterId?: number;
+  testPaperId?: number;
+  title: string;
+  durationMinutes: number;
+  totalQuestions: number;
+  totalMarks?: number;
+  examTag?: string;
+  questions?: Question[];
+}
+
 export interface Lesson {
   id: number;
   chapterId?: number;
   title: string;
+  type?: ContentType;
+  // Video attributes
   vimeoVideoId?: string;
   durationMinutes?: number;
   durationSeconds?: number;
   isFreePreview?: boolean;
+  // Document attributes
   pdfNotesUrl?: string;
+  fileSizeBytes?: string;
+  pageCount?: number;
+  // Test Paper attributes
+  testPaperId?: number;
+  totalQuestions?: number;
+  totalMarks?: number;
 }
 
 export interface Chapter {
   id: number;
+  subjectId?: number;
+  subjectName?: string;
   title: string;
   name?: string;
   sequenceOrder?: number;
   lessons: Lesson[];
+  videos?: Lesson[];
+  documents?: CourseDocument[];
+  testPapers?: ChapterTestPaper[];
+}
+
+export interface CourseSubject {
+  id: number;
+  name: string;
+  code?: string;
+  icon?: string;
+  chapters: Chapter[];
 }
 
 export interface Course {
@@ -43,7 +89,10 @@ export interface Course {
   isBestseller?: boolean;
   isFeatured?: boolean;
   features: string[];
+  subjects?: CourseSubject[];
   chapters?: Chapter[];
+  documents?: CourseDocument[];
+  testPapers?: TestPaper[];
 }
 
 export interface QuestionOption {

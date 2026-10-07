@@ -1,0 +1,787 @@
+[
+  {
+    "id": 6,
+    "subject": "Chemistry",
+    "chapter": "Metallurgy & Physical Chemistry",
+    "type": "MCQ",
+    "questionText": "The metallurgical process in which a metal is obtained in a fused state is called",
+    "options": [
+      {
+        "key": "A",
+        "text": "smelting"
+      },
+      {
+        "key": "B",
+        "text": "roasting"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #6."
+  },
+  {
+    "id": 17,
+    "subject": "Biology & Life Science",
+    "chapter": "Genetics & Molecular Biology",
+    "type": "MCQ",
+    "questionText": "The inherited traits of an organism are controlled by",
+    "options": [
+      {
+        "key": "A",
+        "text": "RNA molecules"
+      },
+      {
+        "key": "B",
+        "text": "nucleotides"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #17."
+  },
+  {
+    "id": 19,
+    "subject": "Chemistry",
+    "chapter": "Metallurgy & Physical Chemistry",
+    "type": "MCQ",
+    "questionText": "What are the number of moles of CO2 which contains 16 g of oxygen?",
+    "options": [
+      {
+        "key": "A",
+        "text": "0.5 mole"
+      },
+      {
+        "key": "B",
+        "text": "0.2 mole"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #19."
+  },
+  {
+    "id": 1,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "What is the capital of India",
+    "options": [
+      {
+        "key": "A",
+        "text": "Delhi"
+      },
+      {
+        "key": "B",
+        "text": "Panjab"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #1."
+  },
+  {
+    "id": 18,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The heat energy produced when the human body metabolises 1 gram of fat is",
+    "options": [
+      {
+        "key": "A",
+        "text": "30 KJ"
+      },
+      {
+        "key": "B",
+        "text": "1 KJ"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #18."
+  },
+  {
+    "id": 10,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The nucleus of a hydrogen atom consists of",
+    "options": [
+      {
+        "key": "A",
+        "text": "1 proton only"
+      },
+      {
+        "key": "B",
+        "text": "1 proton + 2 neutron"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #10."
+  },
+  {
+    "id": 4,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The most electronegative element among the following is",
+    "options": [
+      {
+        "key": "A",
+        "text": "sodium"
+      },
+      {
+        "key": "B",
+        "text": "bromine"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #4."
+  },
+  {
+    "id": 7,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The molecules of which gas have highest speed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Thrust"
+      },
+      {
+        "key": "B",
+        "text": "Pressure"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #7."
+  },
+  {
+    "id": 12,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The nuclear particles which are assumed to hold the nucleons together are",
+    "options": [
+      {
+        "key": "A",
+        "text": "electrons"
+      },
+      {
+        "key": "B",
+        "text": "positrons"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #12."
+  },
+  {
+    "id": 5,
+    "subject": "Chemistry",
+    "chapter": "Metallurgy & Physical Chemistry",
+    "type": "MCQ",
+    "questionText": "The metal used to recover copper from a solution of copper sulphate is",
+    "options": [
+      {
+        "key": "A",
+        "text": "Na"
+      },
+      {
+        "key": "B",
+        "text": "Ag"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #5."
+  },
+  {
+    "id": 3,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The number of moles of solute present in 1 kg of a solvent is called its",
+    "options": [
+      {
+        "key": "A",
+        "text": "molality"
+      },
+      {
+        "key": "B",
+        "text": "normality"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #3."
+  },
+  {
+    "id": 14,
+    "subject": "Chemistry",
+    "chapter": "Metallurgy & Physical Chemistry",
+    "type": "MCQ",
+    "questionText": "The metal that is used as a catalyst in the hydrogenation of oils is",
+    "options": [
+      {
+        "key": "A",
+        "text": "Ni"
+      },
+      {
+        "key": "B",
+        "text": "Pb"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #14."
+  },
+  {
+    "id": 8,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The main buffer system of the human blood is",
+    "options": [
+      {
+        "key": "A",
+        "text": "H2CO3 - HCO3"
+      },
+      {
+        "key": "B",
+        "text": "H2CO3 - CO32-"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #8."
+  },
+  {
+    "id": 13,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The octane number of zero is assigned to",
+    "options": [
+      {
+        "key": "A",
+        "text": "2-methyl octane"
+      },
+      {
+        "key": "B",
+        "text": "n-heptane"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #13."
+  },
+  {
+    "id": 9,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The most commonly used bleaching agent is",
+    "options": [
+      {
+        "key": "A",
+        "text": "will overflow"
+      },
+      {
+        "key": "B",
+        "text": "depressed"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #9."
+  },
+  {
+    "id": 15,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The most abundant rare gas in the atmosphere is",
+    "options": [
+      {
+        "key": "A",
+        "text": "He"
+      },
+      {
+        "key": "B",
+        "text": "Ne"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #15."
+  },
+  {
+    "id": 2,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The nucleus of an atom consists of",
+    "options": [
+      {
+        "key": "A",
+        "text": "electrons and neutrons"
+      },
+      {
+        "key": "B",
+        "text": "electrons and protons"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #2."
+  },
+  {
+    "id": 16,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The ore which is found in abundance in India is",
+    "options": [
+      {
+        "key": "A",
+        "text": "monazite"
+      },
+      {
+        "key": "B",
+        "text": "luorspar"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #16."
+  },
+  {
+    "id": 11,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The heat required to raise the temperature of body by 1 K is called",
+    "options": [
+      {
+        "key": "A",
+        "text": "specific heat"
+      },
+      {
+        "key": "B",
+        "text": "thermal capacity"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #11."
+  },
+  {
+    "id": 20,
+    "subject": "General Science & Chemistry",
+    "chapter": "Oscillations & General Physics",
+    "type": "MCQ",
+    "questionText": "The monomer of polythene is",
+    "options": [
+      {
+        "key": "A",
+        "text": "vinyl chloride"
+      },
+      {
+        "key": "B",
+        "text": "ethylene"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #20."
+  },
+  {
+    "id": 80,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Stars appears to move from east to west because",
+    "options": [
+      {
+        "key": "A",
+        "text": "All stars move from east to west"
+      },
+      {
+        "key": "B",
+        "text": "The earth rotates from west to east"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #80."
+  },
+  {
+    "id": 73,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "The absorption of ink by blotting paper involves:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Viscosity of ink"
+      },
+      {
+        "key": "B",
+        "text": "Capillary action phenomenon"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #73."
+  },
+  {
+    "id": 70,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Which of the following terms is not used in the field of physics?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Latent heat"
+      },
+      {
+        "key": "B",
+        "text": "Stock value"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #70."
+  },
+  {
+    "id": 75,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Large transformers, when used for some time, become very hot and are cooled by circulating oil. The heating of the transformer is due to:",
+    "options": [
+      {
+        "key": "A",
+        "text": "The heating effect of current alone"
+      },
+      {
+        "key": "B",
+        "text": "Hysteresis loss alone"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #75."
+  },
+  {
+    "id": 83,
+    "subject": "Chemistry",
+    "chapter": "Metallurgy & Physical Chemistry",
+    "type": "MCQ",
+    "questionText": "Metals are good conductors of electricity because:",
+    "options": [
+      {
+        "key": "A",
+        "text": "They contain free electrons."
+      },
+      {
+        "key": "B",
+        "text": "The atoms are lightly packed."
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #83."
+  },
+  {
+    "id": 77,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Light year is a unit of",
+    "options": [
+      {
+        "key": "A",
+        "text": "Time"
+      },
+      {
+        "key": "B",
+        "text": "Distance"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #77."
+  },
+  {
+    "id": 76,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Nuclear sizes are expressed in a unit named",
+    "options": [
+      {
+        "key": "A",
+        "text": "Fermi"
+      },
+      {
+        "key": "B",
+        "text": "Angstrom"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #76."
+  },
+  {
+    "id": 85,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Rectifiers are used to convert:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Direct current to Alternating current"
+      },
+      {
+        "key": "B",
+        "text": "Alternating current to Direct current"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #85."
+  },
+  {
+    "id": 72,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "It is easier to roll a stone up a sloping road than to lift it vertical upwards because",
+    "options": [
+      {
+        "key": "A",
+        "text": "Work done in rolling is more than in lifting."
+      },
+      {
+        "key": "B",
+        "text": "Work done in lifting the stone is equal to rolling it."
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #72."
+  },
+  {
+    "id": 71,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Radiocarbon is produced in the atmosphere as a result of",
+    "options": [
+      {
+        "key": "A",
+        "text": "Collision between fast neutrons and nitrogen nuclei present in the atmosphere."
+      },
+      {
+        "key": "B",
+        "text": "Action of ultraviolet light from the sun on atmospheric oxygen."
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #71."
+  },
+  {
+    "id": 74,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Siphon will fail to work if:",
+    "options": [
+      {
+        "key": "A",
+        "text": "The densities of the liquid in the two vessels are equal."
+      },
+      {
+        "key": "B",
+        "text": "The level of the liquid in the two vessels are at the same height."
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #74."
+  },
+  {
+    "id": 84,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Pick out the scalar quantity",
+    "options": [
+      {
+        "key": "A",
+        "text": "Force"
+      },
+      {
+        "key": "B",
+        "text": "Pressure"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #84."
+  },
+  {
+    "id": 82,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Planets do not twinkle because",
+    "options": [
+      {
+        "key": "A",
+        "text": "They emit light of a constant intensity"
+      },
+      {
+        "key": "B",
+        "text": "Their distance from the earth does not change with time"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #82."
+  },
+  {
+    "id": 81,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Pa(Pascal) is the unit for",
+    "options": [
+      {
+        "key": "A",
+        "text": "Thrust"
+      },
+      {
+        "key": "B",
+        "text": "Pressure"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #81."
+  },
+  {
+    "id": 78,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Mirage is due to:",
+    "options": [
+      {
+        "key": "A",
+        "text": "Unequal heating of different parts of the atmosphere"
+      },
+      {
+        "key": "B",
+        "text": "Magnetic disturbances in the atmosphere"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #78."
+  },
+  {
+    "id": 86,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "100 is formed by?",
+    "options": [
+      {
+        "key": "A",
+        "text": "50+50"
+      },
+      {
+        "key": "B",
+        "text": "10x50"
+      },
+      {
+        "key": "C",
+        "text": "70+30"
+      },
+      {
+        "key": "D",
+        "text": "70+50"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #86."
+  },
+  {
+    "id": 79,
+    "subject": "Physics",
+    "chapter": "Oscillations & Waves",
+    "type": "MCQ",
+    "questionText": "Light from the Sun reaches us in nearly",
+    "options": [
+      {
+        "key": "A",
+        "text": "2 minutes"
+      },
+      {
+        "key": "B",
+        "text": "4 minutes"
+      }
+    ],
+    "correctOption": "A",
+    "marksPositive": 2,
+    "marksNegative": 1,
+    "explanation": "Detailed solution and formula explanation for question #79."
+  }
+]

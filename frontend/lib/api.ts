@@ -37,7 +37,12 @@ function getFromStorage<T>(key: string, initialData: T): T {
       localStorage.setItem(key, JSON.stringify(initialData));
       return initialData;
     }
-    return JSON.parse(item);
+    const parsed = JSON.parse(item);
+    if (Array.isArray(initialData) && Array.isArray(parsed) && parsed.length < initialData.length) {
+      localStorage.setItem(key, JSON.stringify(initialData));
+      return initialData;
+    }
+    return parsed;
   } catch (e) {
     return initialData;
   }
@@ -73,6 +78,20 @@ export const api = {
     const updated = [course, ...courses];
     setToStorage(STORAGE_KEYS.COURSES, updated);
     return course;
+  },
+
+  async updateCourse(updatedCourse: Course): Promise<Course> {
+    const courses = await this.getCourses();
+    const index = courses.findIndex((c) => c.id === updatedCourse.id);
+    let updated: Course[];
+    if (index !== -1) {
+      updated = [...courses];
+      updated[index] = updatedCourse;
+    } else {
+      updated = [updatedCourse, ...courses];
+    }
+    setToStorage(STORAGE_KEYS.COURSES, updated);
+    return updatedCourse;
   },
 
   // EXAMS

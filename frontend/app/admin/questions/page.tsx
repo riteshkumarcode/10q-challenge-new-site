@@ -84,7 +84,7 @@ export default function AdminQuestionsPage() {
 
       {/* Filter Tabs */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1">
-        {['ALL', 'Mathematics', 'Physics', 'Chemistry', 'English Proficiency', 'Logical Reasoning'].map(
+        {['ALL', 'Physics', 'Chemistry', 'Mathematics', 'Logical Reasoning', 'General Science', 'General Knowledge', 'English Proficiency'].map(
           (sub) => (
             <button
               key={sub}

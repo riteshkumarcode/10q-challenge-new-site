@@ -553,13 +553,34 @@ export default function CourseDetail({ onAddToCart = () => {} }) {
                 </button>
 
                 {openAccordion === idx && (
-                  <div className="p-5 pt-1 border-t border-slate-100 bg-slate-50/70 space-y-2">
-                    {module.topics.map((topic, tIdx) => (
-                      <div key={tIdx} className="flex items-center space-x-3 text-xs sm:text-sm text-slate-700 py-1">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                        <span className="font-medium">{topic}</span>
-                      </div>
-                    ))}
+                  <div className="p-5 pt-3 border-t border-slate-100 bg-slate-50/80 space-y-3">
+                    {/* Topics List */}
+                    <div className="space-y-1.5">
+                      {module.topics.map((topic, tIdx) => (
+                        <div key={tIdx} className="flex items-center space-x-3 text-xs sm:text-sm text-slate-700 py-0.5">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                          <span className="font-medium">{topic}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Multimedia & Test Assets Badges for this Module */}
+                    <div className="pt-3 border-t border-slate-200/60 flex flex-wrap items-center gap-2 text-xs">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-100 text-purple-800 font-bold">
+                        <Play className="w-3.5 h-3.5 fill-purple-700 text-purple-700" />
+                        <span>HD Video Lessons ({module.lessonsCount || 8})</span>
+                      </span>
+
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-100 text-emerald-800 font-bold">
+                        <FileText className="w-3.5 h-3.5 text-emerald-700" />
+                        <span>Downloadable Formula Notes (PDF)</span>
+                      </span>
+
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-rose-100 text-rose-800 font-bold">
+                        <Zap className="w-3.5 h-3.5 text-rose-700 fill-rose-600" />
+                        <span>Chapter Speed Test &amp; Question Paper</span>
+                      </span>
+                    </div>
                   </div>
                 )}
               </div>

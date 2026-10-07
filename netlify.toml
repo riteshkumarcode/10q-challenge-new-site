@@ -1,0 +1,68 @@
+# ============================================================================
+# 10Q CHALLENGE - NETLIFY DEPLOYMENT CONFIGURATION
+# ============================================================================
+
+[build]
+  base = "frontend"
+  publish = ".next"
+  command = "npm run build"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20.18.0"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# Legacy 301 Permanent Redirects
+[[redirects]]
+  from = "/sign-in"
+  to = "/login"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/login/sign-in"
+  to = "/login"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sign-up"
+  to = "/register"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/course-list"
+  to = "/course-all"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/student-index"
+  to = "/student/dashboard"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/student-course-list"
+  to = "/student/courses"
+  status = 301
+  force = true
+
+# HTTP Response Caching Headers
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    cache-control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/site/*"
+  [headers.values]
+    cache-control = "public, max-age=86400"
+
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    cache-control = "public, max-age=86400"
