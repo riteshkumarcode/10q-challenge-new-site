@@ -397,13 +397,23 @@ export default function AdminCoursesPage() {
           </p>
         </div>
 
-        <button
-          onClick={() => setIsCreateModalOpen(true)}
-          className="px-5 py-2.5 rounded-xl bg-[#3F328A] hover:bg-[#2D246B] text-white font-bold text-xs transition-colors flex items-center gap-1.5 shadow-sm"
-        >
-          <Plus size={16} />
-          <span>Add New Course</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/assignments"
+            className="px-5 py-2.5 rounded-xl bg-[#20D66B] hover:bg-[#18B85A] text-slate-900 font-extrabold text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+          >
+            <Layers size={16} />
+            <span>Course Content Assignment</span>
+          </Link>
+
+          <button
+            onClick={() => setIsCreateModalOpen(true)}
+            className="px-5 py-2.5 rounded-xl bg-[#3F328A] hover:bg-[#2D246B] text-white font-bold text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+          >
+            <Plus size={16} />
+            <span>Add New Course</span>
+          </button>
+        </div>
       </div>
 
       {/* Course List Table */}
@@ -447,12 +457,20 @@ export default function AdminCoursesPage() {
                     </td>
                     <td className="p-4 text-right">
                       <div className="flex items-center justify-end gap-2">
+                        <Link
+                          href={`/admin/assignments`}
+                          className="px-3 py-1.5 rounded-xl bg-[#3F328A] hover:bg-[#2D246B] text-white font-bold text-xs transition-colors flex items-center gap-1 shadow-2xs"
+                        >
+                          <Layers size={13} />
+                          <span>Assign Content</span>
+                        </Link>
+
                         <button
                           onClick={() => openCurriculumBuilder(c)}
                           className="px-3 py-1.5 rounded-xl bg-[#F0EDFD] hover:bg-[#3F328A] text-[#3F328A] hover:text-white font-bold text-xs transition-colors flex items-center gap-1 shadow-2xs"
                         >
                           <Layers size={13} />
-                          <span>Edit Curriculum</span>
+                          <span>Curriculum</span>
                         </button>
 
                         <Link

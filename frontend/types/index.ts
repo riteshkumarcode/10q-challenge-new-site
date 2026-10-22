@@ -231,3 +231,81 @@ export interface Exam {
   totalMarks?: number;
   durationMinutes?: number;
 }
+
+// ============================================================================
+// CONTENT MASTER MODELS & COURSE ASSIGNMENTS
+// ============================================================================
+
+export type ContentPublicationStatus = 'Draft' | 'Published' | 'Archived';
+
+export interface VideoMasterItem {
+  id: number;
+  title: string;
+  vimeoVideoId: string;
+  videoUrl?: string;
+  subject: string;
+  chapter: string;
+  description?: string;
+  thumbnailUrl?: string;
+  durationMinutes: number;
+  isFreePreview?: boolean;
+  status: ContentPublicationStatus;
+  displayOrder?: number;
+  createdAt?: string;
+}
+
+export interface DocumentMasterItem {
+  id: number;
+  title: string;
+  subject: string;
+  chapter: string;
+  fileType: 'PDF' | 'DOC' | 'DOCX';
+  fileUrl: string;
+  fileSizeBytes?: string;
+  pageCount?: number;
+  description?: string;
+  status: ContentPublicationStatus;
+  displayOrder?: number;
+  createdAt?: string;
+}
+
+export interface TestSeriesMasterItem {
+  id: number;
+  title: string;
+  examTag: string;
+  targetYear: number;
+  description: string;
+  durationMinutes: number;
+  totalQuestions: number;
+  totalMarks: number;
+  testPaperId?: number;
+  status: ContentPublicationStatus;
+  price?: number;
+  createdAt?: string;
+}
+
+export interface LiveSessionMasterItem {
+  id: number;
+  title: string;
+  description: string;
+  date: string; // YYYY-MM-DD
+  startTime: string; // HH:mm
+  endTime: string; // HH:mm
+  timeZone: string;
+  meetingUrl: string;
+  subject?: string;
+  chapter?: string;
+  facultyName: string;
+  status: 'Scheduled' | 'Live' | 'Completed' | 'Cancelled';
+  createdAt?: string;
+}
+
+export interface CourseContentAssignment {
+  courseId: number;
+  assignedVideoIds: number[];
+  assignedDocumentIds: number[];
+  assignedTestSeriesIds: number[];
+  assignedLiveSessionIds: number[];
+  updatedAt: string;
+}
+

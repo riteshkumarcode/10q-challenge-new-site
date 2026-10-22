@@ -8,6 +8,11 @@ import {
   Order,
   User,
   Coupon,
+  VideoMasterItem,
+  DocumentMasterItem,
+  TestSeriesMasterItem,
+  LiveSessionMasterItem,
+  CourseContentAssignment,
 } from '@/types';
 import {
   MOCK_COURSES,
@@ -19,6 +24,13 @@ import {
   MOCK_ORDERS,
   MOCK_COUPONS,
 } from './data';
+import {
+  INITIAL_VIDEO_MASTER,
+  INITIAL_DOCUMENT_MASTER,
+  INITIAL_TEST_SERIES_MASTER,
+  INITIAL_LIVE_SESSIONS_MASTER,
+  INITIAL_COURSE_ASSIGNMENTS,
+} from './assignmentData';
 
 const STORAGE_KEYS = {
   COURSES: '10q_courses_data',
@@ -27,6 +39,11 @@ const STORAGE_KEYS = {
   ORDERS: '10q_orders_data',
   QUESTIONS: '10q_questions_data',
   TESTS: '10q_tests_data',
+  VIDEOS: '10q_video_master_data',
+  DOCUMENTS: '10q_document_master_data',
+  TEST_SERIES: '10q_test_series_master_data',
+  LIVE_SESSIONS: '10q_live_sessions_master_data',
+  ASSIGNMENTS: '10q_course_assignments_data',
 };
 
 function getFromStorage<T>(key: string, initialData: T): T {
@@ -276,6 +293,332 @@ export const api = {
         : match.discountValue;
 
     return { valid: true, discount, coupon: match };
+  },
+
+  // ==========================================================================
+  // VIDEO MASTER (CENTRAL VIMEO REPOSITORY)
+  // ==========================================================================
+  async getVideos(): Promise<VideoMasterItem[]> {
+    return getFromStorage<VideoMasterItem[]>(STORAGE_KEYS.VIDEOS, INITIAL_VIDEO_MASTER);
+  },
+
+  async getVideoById(id: number): Promise<VideoMasterItem | null> {
+    const videos = await this.getVideos();
+    return videos.find((v) => v.id === id) || null;
+  },
+
+  async createVideo(video: Omit<VideoMasterItem, 'id'>): Promise<VideoMasterItem> {
+    const videos = await this.getVideos();
+    const newId = videos.length > 0 ? Math.max(...videos.map((v) => v.id)) + 1 : 1;
+    const newVideo: VideoMasterItem = {
+      ...video,
+      id: newId,
+      createdAt: new Date().toISOString(),
+    };
+    const updated = [newVideo, ...videos];
+    setToStorage(STORAGE_KEYS.VIDEOS, updated);
+    return newVideo;
+  },
+
+  async updateVideo(updatedVideo: VideoMasterItem): Promise<VideoMasterItem> {
+    const videos = await this.getVideos();
+    const index = videos.findIndex((v) => v.id === updatedVideo.id);
+    let updated: VideoMasterItem[];
+    if (index !== -1) {
+      updated = [...videos];
+      updated[index] = updatedVideo;
+    } else {
+      updated = [updatedVideo, ...videos];
+    }
+    setToStorage(STORAGE_KEYS.VIDEOS, updated);
+    return updatedVideo;
+  },
+
+  async deleteVideo(id: number): Promise<boolean> {
+    const videos = await this.getVideos();
+    const updated = videos.filter((v) => v.id !== id);
+    setToStorage(STORAGE_KEYS.VIDEOS, updated);
+    return true;
+  },
+
+  // ==========================================================================
+  // DOCUMENT MASTER (CENTRAL STUDY MATERIALS REPOSITORY)
+  // ==========================================================================
+  async getDocuments(): Promise<DocumentMasterItem[]> {
+    return getFromStorage<DocumentMasterItem[]>(STORAGE_KEYS.DOCUMENTS, INITIAL_DOCUMENT_MASTER);
+  },
+
+  async getDocumentById(id: number): Promise<DocumentMasterItem | null> {
+    const docs = await this.getDocuments();
+    return docs.find((d) => d.id === id) || null;
+  },
+
+  async createDocument(doc: Omit<DocumentMasterItem, 'id'>): Promise<DocumentMasterItem> {
+    const docs = await this.getDocuments();
+    const newId = docs.length > 0 ? Math.max(...docs.map((d) => d.id)) + 1 : 1;
+    const newDoc: DocumentMasterItem = {
+      ...doc,
+      id: newId,
+      createdAt: new Date().toISOString(),
+    };
+    const updated = [newDoc, ...docs];
+    setToStorage(STORAGE_KEYS.DOCUMENTS, updated);
+    return newDoc;
+  },
+
+  async updateDocument(updatedDoc: DocumentMasterItem): Promise<DocumentMasterItem> {
+    const docs = await this.getDocuments();
+    const index = docs.findIndex((d) => d.id === updatedDoc.id);
+    let updated: DocumentMasterItem[];
+    if (index !== -1) {
+      updated = [...docs];
+      updated[index] = updatedDoc;
+    } else {
+      updated = [updatedDoc, ...docs];
+    }
+    setToStorage(STORAGE_KEYS.DOCUMENTS, updated);
+    return updatedDoc;
+  },
+
+  async deleteDocument(id: number): Promise<boolean> {
+    const docs = await this.getDocuments();
+    const updated = docs.filter((d) => d.id !== id);
+    setToStorage(STORAGE_KEYS.DOCUMENTS, updated);
+    return true;
+  },
+
+  // ==========================================================================
+  // TEST SERIES MASTER (CENTRAL ASSESSMENTS REPOSITORY)
+  // ==========================================================================
+  async getTestSeries(): Promise<TestSeriesMasterItem[]> {
+    return getFromStorage<TestSeriesMasterItem[]>(STORAGE_KEYS.TEST_SERIES, INITIAL_TEST_SERIES_MASTER);
+  },
+
+  async getTestSeriesById(id: number): Promise<TestSeriesMasterItem | null> {
+    const tests = await this.getTestSeries();
+    return tests.find((t) => t.id === id) || null;
+  },
+
+  async createTestSeries(test: Omit<TestSeriesMasterItem, 'id'>): Promise<TestSeriesMasterItem> {
+    const tests = await this.getTestSeries();
+    const newId = tests.length > 0 ? Math.max(...tests.map((t) => t.id)) + 1 : 1;
+    const newTest: TestSeriesMasterItem = {
+      ...test,
+      id: newId,
+      createdAt: new Date().toISOString(),
+    };
+    const updated = [newTest, ...tests];
+    setToStorage(STORAGE_KEYS.TEST_SERIES, updated);
+    return newTest;
+  },
+
+  async updateTestSeries(updatedTest: TestSeriesMasterItem): Promise<TestSeriesMasterItem> {
+    const tests = await this.getTestSeries();
+    const index = tests.findIndex((t) => t.id === updatedTest.id);
+    let updated: TestSeriesMasterItem[];
+    if (index !== -1) {
+      updated = [...tests];
+      updated[index] = updatedTest;
+    } else {
+      updated = [updatedTest, ...tests];
+    }
+    setToStorage(STORAGE_KEYS.TEST_SERIES, updated);
+    return updatedTest;
+  },
+
+  async deleteTestSeries(id: number): Promise<boolean> {
+    const tests = await this.getTestSeries();
+    const updated = tests.filter((t) => t.id !== id);
+    setToStorage(STORAGE_KEYS.TEST_SERIES, updated);
+    return true;
+  },
+
+  // ==========================================================================
+  // LIVE SESSIONS MASTER (CENTRAL LIVE CLASSES REPOSITORY)
+  // ==========================================================================
+  async getLiveSessions(): Promise<LiveSessionMasterItem[]> {
+    return getFromStorage<LiveSessionMasterItem[]>(STORAGE_KEYS.LIVE_SESSIONS, INITIAL_LIVE_SESSIONS_MASTER);
+  },
+
+  async getLiveSessionById(id: number): Promise<LiveSessionMasterItem | null> {
+    const sessions = await this.getLiveSessions();
+    return sessions.find((s) => s.id === id) || null;
+  },
+
+  async createLiveSession(session: Omit<LiveSessionMasterItem, 'id'>): Promise<LiveSessionMasterItem> {
+    const sessions = await this.getLiveSessions();
+    const newId = sessions.length > 0 ? Math.max(...sessions.map((s) => s.id)) + 1 : 1;
+    const newSession: LiveSessionMasterItem = {
+      ...session,
+      id: newId,
+      createdAt: new Date().toISOString(),
+    };
+    const updated = [newSession, ...sessions];
+    setToStorage(STORAGE_KEYS.LIVE_SESSIONS, updated);
+    return newSession;
+  },
+
+  async updateLiveSession(updatedSession: LiveSessionMasterItem): Promise<LiveSessionMasterItem> {
+    const sessions = await this.getLiveSessions();
+    const index = sessions.findIndex((s) => s.id === updatedSession.id);
+    let updated: LiveSessionMasterItem[];
+    if (index !== -1) {
+      updated = [...sessions];
+      updated[index] = updatedSession;
+    } else {
+      updated = [updatedSession, ...sessions];
+    }
+    setToStorage(STORAGE_KEYS.LIVE_SESSIONS, updated);
+    return updatedSession;
+  },
+
+  async deleteLiveSession(id: number): Promise<boolean> {
+    const sessions = await this.getLiveSessions();
+    const updated = sessions.filter((s) => s.id !== id);
+    setToStorage(STORAGE_KEYS.LIVE_SESSIONS, updated);
+    return true;
+  },
+
+  // ==========================================================================
+  // COURSE CONTENT ASSIGNMENT (MANY-TO-MANY RELATIONSHIPS)
+  // ==========================================================================
+  async getAllAssignments(): Promise<Record<number, CourseContentAssignment>> {
+    return getFromStorage<Record<number, CourseContentAssignment>>(
+      STORAGE_KEYS.ASSIGNMENTS,
+      INITIAL_COURSE_ASSIGNMENTS
+    );
+  },
+
+  async getCourseAssignments(courseId: number): Promise<CourseContentAssignment> {
+    const all = await this.getAllAssignments();
+    if (all[courseId]) {
+      return all[courseId];
+    }
+    // Return empty assignment structure if course has no assignments yet
+    return {
+      courseId,
+      assignedVideoIds: [],
+      assignedDocumentIds: [],
+      assignedTestSeriesIds: [],
+      assignedLiveSessionIds: [],
+      updatedAt: new Date().toISOString(),
+    };
+  },
+
+  async saveCourseAssignments(
+    courseId: number,
+    partial: {
+      assignedVideoIds?: number[];
+      assignedDocumentIds?: number[];
+      assignedTestSeriesIds?: number[];
+      assignedLiveSessionIds?: number[];
+    }
+  ): Promise<CourseContentAssignment> {
+    const all = await this.getAllAssignments();
+    const existing = all[courseId] || {
+      courseId,
+      assignedVideoIds: [],
+      assignedDocumentIds: [],
+      assignedTestSeriesIds: [],
+      assignedLiveSessionIds: [],
+      updatedAt: new Date().toISOString(),
+    };
+
+    const updatedAssignment: CourseContentAssignment = {
+      courseId,
+      assignedVideoIds:
+        partial.assignedVideoIds !== undefined
+          ? Array.from(new Set(partial.assignedVideoIds))
+          : existing.assignedVideoIds,
+      assignedDocumentIds:
+        partial.assignedDocumentIds !== undefined
+          ? Array.from(new Set(partial.assignedDocumentIds))
+          : existing.assignedDocumentIds,
+      assignedTestSeriesIds:
+        partial.assignedTestSeriesIds !== undefined
+          ? Array.from(new Set(partial.assignedTestSeriesIds))
+          : existing.assignedTestSeriesIds,
+      assignedLiveSessionIds:
+        partial.assignedLiveSessionIds !== undefined
+          ? Array.from(new Set(partial.assignedLiveSessionIds))
+          : existing.assignedLiveSessionIds,
+      updatedAt: new Date().toISOString(),
+    };
+
+    all[courseId] = updatedAssignment;
+    setToStorage(STORAGE_KEYS.ASSIGNMENTS, all);
+    return updatedAssignment;
+  },
+
+  async removeAssignmentItem(
+    courseId: number,
+    itemType: 'video' | 'document' | 'testSeries' | 'liveSession',
+    itemId: number
+  ): Promise<CourseContentAssignment> {
+    const current = await this.getCourseAssignments(courseId);
+    let patch: Partial<CourseContentAssignment> = {};
+
+    if (itemType === 'video') {
+      patch.assignedVideoIds = current.assignedVideoIds.filter((id) => id !== itemId);
+    } else if (itemType === 'document') {
+      patch.assignedDocumentIds = current.assignedDocumentIds.filter((id) => id !== itemId);
+    } else if (itemType === 'testSeries') {
+      patch.assignedTestSeriesIds = current.assignedTestSeriesIds.filter((id) => id !== itemId);
+    } else if (itemType === 'liveSession') {
+      patch.assignedLiveSessionIds = current.assignedLiveSessionIds.filter((id) => id !== itemId);
+    }
+
+    return this.saveCourseAssignments(courseId, patch);
+  },
+
+  // Helper: Retrieve hydrated assigned content objects for a course
+  async getCourseAssignedContent(courseId: number): Promise<{
+    videos: VideoMasterItem[];
+    documents: DocumentMasterItem[];
+    testSeries: TestSeriesMasterItem[];
+    liveSessions: LiveSessionMasterItem[];
+  }> {
+    const assignment = await this.getCourseAssignments(courseId);
+    const [allVideos, allDocs, allTests, allSessions] = await Promise.all([
+      this.getVideos(),
+      this.getDocuments(),
+      this.getTestSeries(),
+      this.getLiveSessions(),
+    ]);
+
+    const videos = allVideos.filter((v) => assignment.assignedVideoIds.includes(v.id));
+    const documents = allDocs.filter((d) => assignment.assignedDocumentIds.includes(d.id));
+    const testSeries = allTests.filter((t) => assignment.assignedTestSeriesIds.includes(t.id));
+    const liveSessions = allSessions.filter((s) => assignment.assignedLiveSessionIds.includes(s.id));
+
+    return { videos, documents, testSeries, liveSessions };
+  },
+
+  // Helper: Find which courses an individual master item is currently linked to
+  async getCoursesLinkedToItem(
+    itemType: 'video' | 'document' | 'testSeries' | 'liveSession',
+    itemId: number
+  ): Promise<{ id: number; title: string }[]> {
+    const [allCourses, allAssignments] = await Promise.all([
+      this.getCourses(),
+      this.getAllAssignments(),
+    ]);
+
+    const linkedCourseIds = Object.keys(allAssignments)
+      .map(Number)
+      .filter((cid) => {
+        const a = allAssignments[cid];
+        if (!a) return false;
+        if (itemType === 'video') return a.assignedVideoIds.includes(itemId);
+        if (itemType === 'document') return a.assignedDocumentIds.includes(itemId);
+        if (itemType === 'testSeries') return a.assignedTestSeriesIds.includes(itemId);
+        if (itemType === 'liveSession') return a.assignedLiveSessionIds.includes(itemId);
+        return false;
+      });
+
+    return allCourses
+      .filter((c) => linkedCourseIds.includes(c.id))
+      .map((c) => ({ id: c.id, title: c.title }));
   },
 };
 

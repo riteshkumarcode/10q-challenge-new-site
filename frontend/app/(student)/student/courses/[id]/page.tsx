@@ -21,8 +21,23 @@ import {
   Check,
   Eye,
   FileCheck,
+  Video,
+  Radio,
+  Calendar,
+  Users,
 } from 'lucide-react';
-import { Course, CourseSubject, Chapter, Lesson, CourseDocument, ChapterTestPaper } from '@/types';
+import {
+  Course,
+  CourseSubject,
+  Chapter,
+  Lesson,
+  CourseDocument,
+  ChapterTestPaper,
+  VideoMasterItem,
+  DocumentMasterItem,
+  TestSeriesMasterItem,
+  LiveSessionMasterItem,
+} from '@/types';
 import { api } from '@/lib/api';
 import { VimeoPlayer } from '@/components/student/VimeoPlayer';
 import { DoubtModal } from '@/components/student/DoubtModal';
@@ -48,14 +63,142 @@ export default function ClassroomPage({ params }: ClassroomPageProps) {
   const [currentVideoTime, setCurrentVideoTime] = useState<number>(0);
   const [isDoubtModalOpen, setIsDoubtModalOpen] = useState(false);
   const [completedItemIds, setCompletedItemIds] = useState<number[]>([1011, 1014]);
+  const [assignedContent, setAssignedContent] = useState<{
+    videos: VideoMasterItem[];
+    documents: DocumentMasterItem[];
+    testSeries: TestSeriesMasterItem[];
+    liveSessions: LiveSessionMasterItem[];
+  }>({
+    videos: [],
+    documents: [],
+    testSeries: [],
+    liveSessions: [],
+  });
 
   useEffect(() => {
     async function loadCourse() {
       try {
-        const found = await api.getCourseById(courseId);
+        const [found, assigned] = await Promise.all([
+          api.getCourseById(courseId),
+          api.getCourseAssignedContent(courseId),
+        ]);
+
         if (found) {
-          setCourse(found);
-          const firstSubject = found.subjects?.[0];
+          let enrichedCourse: Course = { ...found };
+          setAssignedContent(assigned);
+
+          // Dynamically merge assigned videos & documents into curriculum tree if not present
+          const existingSubjects: CourseSubject[] = enrichedCourse.subjects
+            ? JSON.parse(JSON.stringify(enrichedCourse.subjects))
+            : [];
+
+          if (assigned.videos && assigned.videos.length > 0) {
+            assigned.videos.forEach((vid) => {
+              let sub = existingSubjects.find(
+                (s) => s.name.toLowerCase() === vid.subject.toLowerCase()
+              );
+              if (!sub) {
+                sub = {
+                  id: 9000 + existingSubjects.length + 1,
+                  name: vid.subject,
+                  code: vid.subject.slice(0, 3).toUpperCase(),
+                  icon: '⚡',
+                  chapters: [],
+                };
+                existingSubjects.push(sub);
+              }
+
+              let chapIndex = sub.chapters.findIndex(
+                (c) => c.title.toLowerCase() === vid.chapter.toLowerCase()
+              );
+              let chap: Chapter;
+              if (chapIndex === -1) {
+                chap = {
+                  id: 8000 + sub.chapters.length + 1,
+                  title: vid.chapter,
+                  sequenceOrder: sub.chapters.length + 1,
+                  lessons: [],
+                  documents: [],
+                  testPapers: [],
+                };
+                sub.chapters.push(chap);
+              } else {
+                chap = sub.chapters[chapIndex];
+              }
+
+              if (
+                !chap.lessons.some(
+                  (l) => l.vimeoVideoId === vid.vimeoVideoId || l.title === vid.title
+                )
+              ) {
+                chap.lessons.push({
+                  id: vid.id,
+                  title: vid.title,
+                  vimeoVideoId: vid.vimeoVideoId,
+                  durationMinutes: vid.durationMinutes || 45,
+                  isFreePreview: false,
+                });
+              }
+            });
+          }
+
+          if (assigned.documents && assigned.documents.length > 0) {
+            assigned.documents.forEach((doc) => {
+              let sub = existingSubjects.find(
+                (s) => s.name.toLowerCase() === doc.subject.toLowerCase()
+              );
+              if (!sub) {
+                sub = {
+                  id: 9000 + existingSubjects.length + 1,
+                  name: doc.subject,
+                  code: doc.subject.slice(0, 3).toUpperCase(),
+                  icon: '📑',
+                  chapters: [],
+                };
+                existingSubjects.push(sub);
+              }
+
+              let chapIndex = sub.chapters.findIndex(
+                (c) => c.title.toLowerCase() === doc.chapter.toLowerCase()
+              );
+              let chap: Chapter;
+              if (chapIndex === -1) {
+                chap = {
+                  id: 8000 + sub.chapters.length + 1,
+                  title: doc.chapter,
+                  sequenceOrder: sub.chapters.length + 1,
+                  lessons: [],
+                  documents: [],
+                  testPapers: [],
+                };
+                sub.chapters.push(chap);
+              } else {
+                chap = sub.chapters[chapIndex];
+              }
+
+              if (!chap.documents) {
+                chap.documents = [];
+              }
+
+              if (!chap.documents.some((d) => d.id === doc.id || d.title === doc.title)) {
+                chap.documents.push({
+                  id: doc.id,
+                  title: doc.title,
+                  pdfUrl: doc.fileUrl,
+                  fileSizeBytes: doc.fileSizeBytes || '2.5 MB',
+                  pageCount: doc.pageCount || 20,
+                });
+              }
+            });
+          }
+
+          if (existingSubjects.length > 0) {
+            enrichedCourse.subjects = existingSubjects;
+          }
+
+          setCourse(enrichedCourse);
+
+          const firstSubject = enrichedCourse.subjects?.[0];
           if (firstSubject) {
             setSelectedSubjectId(firstSubject.id);
             const firstChapter = firstSubject.chapters?.[0];
@@ -69,16 +212,16 @@ export default function ClassroomPage({ params }: ClassroomPageProps) {
                 setActiveDocument(firstChapter.documents[0]);
               }
             }
-          } else if (found.chapters && found.chapters.length > 0) {
-            setExpandedChapterId(found.chapters[0].id);
-            if (found.chapters[0].lessons?.length > 0) {
+          } else if (enrichedCourse.chapters && enrichedCourse.chapters.length > 0) {
+            setExpandedChapterId(enrichedCourse.chapters[0].id);
+            if (enrichedCourse.chapters[0].lessons?.length > 0) {
               setContentType('VIDEO');
-              setActiveLesson(found.chapters[0].lessons[0]);
+              setActiveLesson(enrichedCourse.chapters[0].lessons[0]);
             }
           }
         }
       } catch (err) {
-        console.error(err);
+        console.error('Failed to load course details:', err);
       }
     }
     loadCourse();
@@ -739,6 +882,180 @@ export default function ClassroomPage({ params }: ClassroomPageProps) {
           </div>
         </div>
       </div>
+
+      {/* 3. ASSIGNED LIVE SESSIONS & INTERACTIVE MASTERCLASSES */}
+      {assignedContent.liveSessions && assignedContent.liveSessions.length > 0 && (
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E7E3F5] shadow-xs space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#F1EFFB]">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
+                <Radio className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-lg text-[#17152A]">
+                  Scheduled Live Masterclasses &amp; Doubt Sessions
+                </h3>
+                <p className="text-xs text-[#6E6990]">
+                  Exclusive interactive sessions assigned directly to this course.
+                </p>
+              </div>
+            </div>
+            <span className="px-3 py-1 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 w-fit">
+              {assignedContent.liveSessions.length} Live Class{assignedContent.liveSessions.length > 1 ? 'es' : ''} Included
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {assignedContent.liveSessions.map((session) => (
+              <div
+                key={session.id}
+                className="p-5 rounded-2xl border border-[#E7E3F5] bg-[#FAFAFD] hover:bg-white hover:border-[#3F328A]/40 transition-all space-y-3 flex flex-col justify-between"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-[#F0EDFD] text-[#3F328A]">
+                      {session.subject}
+                    </span>
+                    <span
+                      className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${
+                        session.status === 'Live'
+                          ? 'bg-rose-500 text-white animate-pulse'
+                          : session.status === 'Completed'
+                          ? 'bg-slate-100 text-slate-600'
+                          : 'bg-emerald-100 text-emerald-800'
+                      }`}
+                    >
+                      {session.status === 'Live'
+                        ? '● LIVE NOW'
+                        : session.status === 'Completed'
+                        ? 'Recorded'
+                        : 'Scheduled'}
+                    </span>
+                  </div>
+
+                  <h4 className="font-bold text-sm text-[#17152A] line-clamp-2">
+                    {session.title}
+                  </h4>
+
+                  <p className="text-xs text-[#6E6990] line-clamp-2">
+                    {session.description}
+                  </p>
+                </div>
+
+                <div className="space-y-3 pt-3 border-t border-[#E7E3F5]">
+                  <div className="flex items-center justify-between text-xs text-[#6E6990]">
+                    <span className="flex items-center gap-1.5 font-semibold text-[#17152A]">
+                      <Calendar className="w-3.5 h-3.5 text-[#3F328A]" />
+                      {session.date}
+                    </span>
+                    <span className="flex items-center gap-1 font-semibold text-[#3F328A]">
+                      <Clock className="w-3.5 h-3.5" />
+                      {session.startTime} - {session.endTime}
+                    </span>
+                  </div>
+
+                  {session.facultyName && (
+                    <div className="text-[11px] text-[#6E6990] flex items-center gap-1.5">
+                      <Users className="w-3.5 h-3.5 text-[#3F328A]" />
+                      <span>Mentor: <strong className="text-[#17152A]">{session.facultyName}</strong></span>
+                    </div>
+                  )}
+
+                  {session.meetingUrl ? (
+                    <a
+                      href={session.meetingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#3F328A] to-[#2D246B] hover:opacity-95 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
+                    >
+                      <Radio className="w-3.5 h-3.5 text-rose-400" />
+                      <span>Join Live Class (Private Access)</span>
+                      <ExternalLink className="w-3 h-3 ml-1" />
+                    </a>
+                  ) : (
+                    <div className="w-full py-2 rounded-xl bg-slate-100 text-slate-500 font-bold text-xs text-center">
+                      Joining link will open 10m before start
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 4. ASSIGNED TEST SERIES & FULL-LENGTH MOCKS */}
+      {assignedContent.testSeries && assignedContent.testSeries.length > 0 && (
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E7E3F5] shadow-xs space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#F1EFFB]">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold">
+                <FileCheck className="w-5 h-5 text-[#3F328A]" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-lg text-[#17152A]">
+                  Assigned CBT Test Series &amp; Full Mocks
+                </h3>
+                <p className="text-xs text-[#6E6990]">
+                  Official examination simulator test papers included with your course package.
+                </p>
+              </div>
+            </div>
+            <span className="px-3 py-1 rounded-xl text-xs font-bold bg-indigo-50 text-[#3F328A] border border-indigo-200 w-fit">
+              {assignedContent.testSeries.length} Test Series Assigned
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {assignedContent.testSeries.map((series) => (
+              <div
+                key={series.id}
+                className="p-5 rounded-2xl border border-[#E7E3F5] bg-[#FAFAFD] hover:bg-white hover:border-[#FF3F68]/40 transition-all space-y-3 flex flex-col justify-between"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-[#FFE8ED] text-[#FF3F68]">
+                      {series.examTag} {series.targetYear}
+                    </span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                      {series.status}
+                    </span>
+                  </div>
+
+                  <h4 className="font-bold text-sm text-[#17152A] line-clamp-2">
+                    {series.title}
+                  </h4>
+
+                  <p className="text-xs text-[#6E6990] line-clamp-2">
+                    {series.description}
+                  </p>
+                </div>
+
+                <div className="space-y-3 pt-3 border-t border-[#E7E3F5]">
+                  <div className="flex items-center justify-between text-xs text-[#6E6990]">
+                    <span className="flex items-center gap-1 font-semibold text-[#17152A]">
+                      <FileQuestion className="w-3.5 h-3.5 text-[#FF3F68]" />
+                      {series.totalQuestions} Questions
+                    </span>
+                    <span className="flex items-center gap-1 font-semibold text-[#3F328A]">
+                      <Clock className="w-3.5 h-3.5" />
+                      {series.durationMinutes} Minutes
+                    </span>
+                  </div>
+
+                  <Link
+                    href={`/student/tests/${series.id || 1}`}
+                    className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#FF3F68] to-[#FF5E82] hover:opacity-95 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
+                  >
+                    <Play className="w-3.5 h-3.5 fill-white" />
+                    <span>Launch CBT Exam Simulation</span>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Contextual Doubt Resolution Modal */}
       <DoubtModal

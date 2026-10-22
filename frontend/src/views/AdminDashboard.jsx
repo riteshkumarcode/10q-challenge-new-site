@@ -56,8 +56,10 @@ import {
   MoreVertical,
   CircleDot,
   Settings,
-  List
+  List,
+  Layers
 } from 'lucide-react';
+import CourseContentAssignmentView from '@/components/admin/CourseContentAssignment';
 import { coursesData as initialCourses } from '../data/courses';
 import { blogsData as initialBlogs } from '../data/blogs';
 import { MASTER_QUESTION_BANK, SUBJECT_MASTER_LIST, CHAPTER_MASTER_LIST } from '../data/questionBank';
@@ -1298,6 +1300,7 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
       title: 'PRODUCT CATALOG',
       items: [
         { name: 'Course Master', icon: BookOpen, count: courseList.length },
+        { name: 'Course Content Assignment', icon: Layers, badge: 'Hub', badgeColor: 'bg-amber-100 text-amber-800 border-amber-300' },
         { name: 'Exam Master', icon: GraduationCap, count: examList.length },
         { name: 'Subject Master', icon: ClipboardList, count: subjectList.length },
         {
@@ -1324,7 +1327,9 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
           ]
         },
         { name: 'Video Master', icon: Video, count: videoList.length },
-        { name: 'Document Master', icon: FileText, count: docList.length }
+        { name: 'Document Master', icon: FileText, count: docList.length },
+        { name: 'Test Series Master', icon: FileCheck },
+        { name: 'Live Session Management', icon: Video }
       ]
     },
     {
@@ -3737,6 +3742,17 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
                             <span>Assign Notes (PDF) ({docList.filter(d => d.course === courseForm.title).length})</span>
                           </button>
 
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveTab('Course Content Assignment');
+                            }}
+                            className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl transition-all flex items-center gap-1.5 shadow-xs"
+                          >
+                            <Layers className="w-3.5 h-3.5" />
+                            <span>Course Content Assignment Hub →</span>
+                          </button>
+
                           <Link
                             to={`/course-detail/${courseForm.slug}`}
                             target="_blank"
@@ -3875,6 +3891,17 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
                                 >
                                   <FileText className="w-3.5 h-3.5" />
                                   <span>Notes ({assignedDocsCount})</span>
+                                </button>
+
+                                <button
+                                  onClick={() => {
+                                    setActiveTab('Course Content Assignment');
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-950 font-extrabold text-xs transition-colors flex items-center gap-1 border border-amber-300"
+                                  title="Open Course Content Assignment hub"
+                                >
+                                  <Layers className="w-3.5 h-3.5 text-amber-700" />
+                                  <span>Assign Content</span>
                                 </button>
 
                                 <Link
@@ -5979,8 +6006,87 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
             </div>
           )}
 
+          {/* COURSE CONTENT ASSIGNMENT TAB */}
+          {activeTab === 'Course Content Assignment' && (
+            <div className="space-y-6 animate-in fade-in">
+              <CourseContentAssignmentView />
+            </div>
+          )}
+
+          {/* TEST SERIES MASTER TAB */}
+          {activeTab === 'Test Series Master' && (
+            <div className="space-y-6 animate-in fade-in">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h1 className="text-xl font-bold text-slate-900 tracking-tight">Test Series Master</h1>
+                  <p className="text-xs text-slate-500 mt-0.5">Central repository of CBT examination test papers and mock series.</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setActiveTab('Course Content Assignment')}
+                    className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-xs flex items-center gap-2"
+                  >
+                    <Layers className="w-4 h-4" />
+                    <span>Assign to Courses</span>
+                  </button>
+                  <Link
+                    to="/admin/tests"
+                    className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl shadow-xs"
+                  >
+                    Manage CBT Question Papers →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs">
+                <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold">Reusable CBT Test Series:</span> Create test series once in Test Series Master. Tests can be linked across BITSAT, JEE Main, COMEDK, and other courses without duplicating question sets.
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <CourseContentAssignmentView defaultTab="testSeries" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* LIVE SESSION MANAGEMENT TAB */}
+          {activeTab === 'Live Session Management' && (
+            <div className="space-y-6 animate-in fade-in">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h1 className="text-xl font-bold text-slate-900 tracking-tight">Live Session Management</h1>
+                  <p className="text-xs text-slate-500 mt-0.5">Schedule interactive masterclasses and link them to multiple courses.</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setActiveTab('Course Content Assignment')}
+                    className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-xs flex items-center gap-2"
+                  >
+                    <Layers className="w-4 h-4" />
+                    <span>Assign to Courses</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs">
+                <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold">Multi-Course Live Classes:</span> Schedule live sessions with date, time, subject, and meeting URL once. Link the session to any course in Course Content Assignment to grant enrolled students access.
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <CourseContentAssignmentView defaultTab="liveSessions" />
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* FALLBACK FOR OTHER TABS */}
-          {!['Exam Master', 'Subject Master', 'Chapter Master', 'Chapter Topic Master', 'Objective Question', 'Numerical Question', 'Course Master', 'Video Master', 'Document Master', 'Coupon', 'Blog Master', 'SEO Page', 'Site Notification', 'Student Notification', 'Student Invoices', 'Student Attempted Test', 'Student Doubt', 'Dashboard'].includes(activeTab) && (
+          {!['Exam Master', 'Subject Master', 'Chapter Master', 'Chapter Topic Master', 'Objective Question', 'Numerical Question', 'Course Master', 'Course Content Assignment', 'Test Series Master', 'Live Session Management', 'Video Master', 'Document Master', 'Coupon', 'Blog Master', 'SEO Page', 'Site Notification', 'Student Notification', 'Student Invoices', 'Student Attempted Test', 'Student Doubt', 'Dashboard'].includes(activeTab) && (
             <div className="bg-white rounded-xl border border-slate-200 p-12 text-center space-y-3 shadow-sm">
               <h3 className="text-lg font-bold text-slate-900">{activeTab} Management</h3>
               <p className="text-slate-500 text-xs">

@@ -15,9 +15,13 @@ import {
   Sparkles,
   CheckCircle2,
   BarChart2,
+  Radio,
+  Calendar,
+  Users,
+  ExternalLink,
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { Course, Doubt, TestPaper } from '@/types';
+import { Course, Doubt, TestPaper, LiveSessionMasterItem } from '@/types';
 import { api } from '@/lib/api';
 
 export default function StudentDashboardPage() {
@@ -25,19 +29,37 @@ export default function StudentDashboardPage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [doubts, setDoubts] = useState<Doubt[]>([]);
   const [tests, setTests] = useState<TestPaper[]>([]);
+  const [liveSessions, setLiveSessions] = useState<LiveSessionMasterItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadDashboardData() {
       try {
-        const [c, d, t] = await Promise.all([
+        const [c, d, t, sessions, allAssignments] = await Promise.all([
           api.getCourses(),
           api.getDoubts(user?.id),
           api.getTestPapers(),
+          api.getLiveSessions(),
+          api.getAllAssignments(),
         ]);
         setCourses(c.slice(0, 3));
         setDoubts(d.slice(0, 3));
         setTests(t);
+
+        // Find sessions assigned to any of user's active courses
+        const activeCourseIds = c.map((cr) => cr.id);
+        const assignedSessionIds = new Set<number>();
+        activeCourseIds.forEach((cid) => {
+          allAssignments[cid]?.assignedLiveSessionIds?.forEach((sid) =>
+            assignedSessionIds.add(sid)
+          );
+        });
+        const enrolledSessions = sessions.filter((s) =>
+          assignedSessionIds.has(s.id)
+        );
+        setLiveSessions(
+          enrolledSessions.length > 0 ? enrolledSessions : sessions.slice(0, 2)
+        );
       } catch (err) {
         console.error('Failed to load dashboard data:', err);
       } finally {
@@ -241,6 +263,84 @@ export default function StudentDashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* 5. UPCOMING LIVE SESSIONS & MENTORSHIP */}
+      {liveSessions.length > 0 && (
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E7E3F5] shadow-xs space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#F1EFFB]">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
+                <Radio className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-lg text-[#17152A]">
+                  Upcoming Live Classes &amp; Mentorship
+                </h3>
+                <p className="text-xs text-[#6E6990]">
+                  Scheduled interactive sessions for your enrolled courses.
+                </p>
+              </div>
+            </div>
+            <span className="px-3 py-1 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 w-fit">
+              {liveSessions.length} Scheduled
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {liveSessions.map((session) => (
+              <div
+                key={session.id}
+                className="p-5 rounded-2xl border border-[#E7E3F5] bg-[#FAFAFD] hover:bg-white hover:border-[#3F328A]/40 transition-all flex flex-col justify-between space-y-3"
+              >
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-[#F0EDFD] text-[#3F328A]">
+                      {session.subject}
+                    </span>
+                    <span
+                      className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${
+                        session.status === 'Live'
+                          ? 'bg-rose-500 text-white animate-pulse'
+                          : 'bg-emerald-100 text-emerald-800'
+                      }`}
+                    >
+                      {session.status === 'Live' ? '● LIVE NOW' : 'Scheduled'}
+                    </span>
+                  </div>
+                  <h4 className="font-bold text-sm text-[#17152A]">{session.title}</h4>
+                  <p className="text-xs text-[#6E6990] line-clamp-2">{session.description}</p>
+                </div>
+
+                <div className="pt-3 border-t border-[#E7E3F5] space-y-2.5">
+                  <div className="flex items-center justify-between text-xs text-[#6E6990]">
+                    <span className="flex items-center gap-1.5 font-semibold text-[#17152A]">
+                      <Calendar className="w-3.5 h-3.5 text-[#3F328A]" />
+                      {session.date}
+                    </span>
+                    <span className="flex items-center gap-1 font-semibold text-[#3F328A]">
+                      <Clock className="w-3.5 h-3.5" />
+                      {session.startTime} - {session.endTime}
+                    </span>
+                  </div>
+
+                  {session.meetingUrl && (
+                    <a
+                      href={session.meetingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-2 rounded-xl bg-[#3F328A] hover:bg-[#2D246B] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-xs"
+                    >
+                      <Radio className="w-3.5 h-3.5 text-rose-300" />
+                      <span>Join Live Class</span>
+                      <ExternalLink className="w-3 h-3 ml-1" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
