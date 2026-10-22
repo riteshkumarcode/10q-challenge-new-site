@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "postinstall": "cd frontend && npm install",
-    "build": "cd frontend && npm run build",
+    "build": "cd frontend && npm run build && cd .. && node scripts/sync-build.js",
+    "postbuild": "node scripts/sync-build.js",
     "start": "node server.js",
     "serve": "node server.js"
   },
