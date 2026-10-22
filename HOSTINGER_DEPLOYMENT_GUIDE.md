@@ -214,3 +214,11 @@ The following files have been prepared and tested specifically for Hostinger:
 ### 4. Port binding error / process already in use
 - **Cause**: Hostinger assigns a port dynamically via `process.env.PORT`.
 - **Fix**: The provided `server.js` automatically binds to `process.env.PORT || 3000`. Do not hardcode a port number.
+
+### 5. "Turbopack is not supported on this platform" / GLIBC_2.29 not found
+- **Cause**: Hostinger shared/cloud Linux servers use an older glibc version (< 2.29). Next.js 16 defaults to Turbopack, which requires native SWC C++ binaries compiled for newer glibc. When it cannot load native SWC, Turbopack aborts because Turbopack does not support WASM.
+- **Solution (Pre-applied)**:
+  1. The build script in `frontend/package.json` is set to `next build --webpack`.
+  2. The `@next/swc-wasm-nodejs` package is included as a dependency.
+  3. Webpack automatically falls back to WebAssembly (WASM), allowing the build to complete smoothly on all Hostinger servers regardless of glibc version.
+
