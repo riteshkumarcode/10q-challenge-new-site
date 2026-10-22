@@ -82,10 +82,10 @@ if (!next) {
       <body>
         <div class="card">
           <h2>⚠️ 10Q Challenge Server — Setup Required</h2>
-          <p>The <strong>Next.js</strong> framework package has not been installed on the server yet.</p>
-          <p><strong>To resolve this in Plesk:</strong></p>
-          <div class="code">1. Go to Plesk &rarr; <strong>Node.js</strong><br>2. Click <strong>"NPM Install"</strong><br>3. Click <strong>"Restart App"</strong></div>
-          <p>Or in Terminal run: <code>npm install && npm run build</code></p>
+          <p>The <strong>Next.js</strong> framework packages have not been installed on the server yet.</p>
+          <p><strong>To resolve this on Hostinger:</strong></p>
+          <div class="code">1. In Hostinger hPanel &rarr; <strong>Node.js</strong><br>2. Click <strong>"Install Packages"</strong> or run <code>npm install</code><br>3. Restart the application</div>
+          <p>Or in Hostinger SSH / Terminal run: <code>npm install && npm run build</code></p>
         </div>
       </body>
       </html>
@@ -117,9 +117,9 @@ if (!next) {
           <h2>🚀 10Q Challenge Server — Build Required</h2>
           <p>The Next.js production build files (<code>.next</code> folder) were not found on the live server.</p>
           <p><strong>To generate the production build:</strong></p>
-          <p>In Plesk, open <strong>Git</strong> &rarr; <strong>Additional Deployment Actions</strong> or open Terminal and run:</p>
+          <p>In Hostinger SSH Terminal or deployment console, run:</p>
           <div class="code">npm install<br>npm run build</div>
-          <p>Then restart the Node.js application in Plesk.</p>
+          <p>Then restart the Node.js application in Hostinger hPanel or PM2.</p>
         </div>
       </body>
       </html>
