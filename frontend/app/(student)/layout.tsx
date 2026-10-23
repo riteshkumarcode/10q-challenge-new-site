@@ -23,6 +23,18 @@ export default function StudentLayout({
     }
   }, [isAuthenticated, router]);
 
+  // Lock body scroll on student mobile menu open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FAFAFD]">
@@ -40,17 +52,24 @@ export default function StudentLayout({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/60 flex">
-          <div className="w-64 bg-white h-full relative">
+        <div
+          className="lg:hidden fixed inset-0 z-50 bg-black/60 flex animate-in fade-in duration-200"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <div
+            className="w-64 bg-white h-full relative shadow-2xl flex flex-col justify-between animate-in slide-in-from-left duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-4 right-4 p-2 text-[#6E6990]"
+              className="absolute top-4 right-4 p-2 text-[#6E6990] hover:text-[#17152A] z-10"
+              aria-label="Close sidebar"
             >
               <X size={20} />
             </button>
-            <StudentSidebar />
+            <StudentSidebar onItemClick={() => setMobileMenuOpen(false)} />
           </div>
-          <div className="flex-grow" onClick={() => setMobileMenuOpen(false)} />
+          <div className="flex-grow" />
         </div>
       )}
 

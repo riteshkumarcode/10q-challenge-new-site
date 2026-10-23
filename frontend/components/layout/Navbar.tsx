@@ -40,6 +40,21 @@ export function Navbar() {
     setActiveDropdown(null);
   }, [pathname]);
 
+  // Lock body scroll on mobile menu open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [mobileMenuOpen]);
+
   const examLinks = [
     { label: 'BITSAT', path: '/exam/bitsat' },
     { label: 'COMEDK', path: '/exam/comedk' },
@@ -292,68 +307,111 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#160d33] border-b border-purple-900/60 px-4 py-6 space-y-3 shadow-2xl animate-in slide-in-from-top duration-200">
-            <Link
-              href="/"
-              className="block px-3.5 py-2.5 rounded-xl font-bold text-sm text-white hover:bg-white/10"
-            >
-              Home
-            </Link>
-            <Link
-              href="/course-all"
-              className="block px-3.5 py-2.5 rounded-xl font-bold text-sm text-white hover:bg-white/10"
-            >
-              All Courses
-            </Link>
-            <Link
-              href="/exam/bitsat"
-              className="block px-3.5 py-2.5 rounded-xl font-bold text-sm text-white hover:bg-white/10"
-            >
-              BITSAT Prep Hub
-            </Link>
-            <Link
-              href="/testseries/bitsat-test-series"
-              className="block px-3.5 py-2.5 rounded-xl font-bold text-sm text-white hover:bg-white/10"
-            >
-              CBT Mock Test Series
-            </Link>
-            <Link
-              href="/mentorship/bitsat-mentorship"
-              className="block px-3.5 py-2.5 rounded-xl font-bold text-sm text-white hover:bg-white/10"
-            >
-              1-on-1 Mentorship
-            </Link>
-            <Link
-              href="/blog"
-              className="block px-3.5 py-2.5 rounded-xl font-bold text-sm text-white hover:bg-white/10"
-            >
-              Strategy Blog
-            </Link>
-            <Link
-              href="/about"
-              className="block px-3.5 py-2.5 rounded-xl font-bold text-sm text-white hover:bg-white/10"
-            >
-              About Us
-            </Link>
-            <Link
-              href="/contact"
-              className="block px-3.5 py-2.5 rounded-xl font-bold text-sm text-white hover:bg-white/10"
-            >
-              Contact
-            </Link>
+      </header>
+
+      {/* Mobile Navigation Drawer (Moved outside header to avoid backdrop-filter trapping) */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-[9999] bg-slate-950/80 backdrop-blur-sm flex justify-end animate-in fade-in duration-200"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <div
+            className="w-[85%] max-w-sm bg-[#160d33] h-full shadow-2xl flex flex-col justify-between overflow-y-auto border-l border-purple-900/60 p-5 animate-in slide-in-from-right duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-purple-900/40">
+                <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center space-x-2">
+                  <img
+                    src="/site/assets/logo_yellow.png"
+                    alt="10Q Challenge"
+                    className="h-8 w-auto object-contain"
+                  />
+                  <span className="font-extrabold text-base text-white">
+                    10Q <span className="text-amber-400">CHALLENGE</span>
+                  </span>
+                </Link>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 text-slate-300 hover:text-white"
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="py-4 space-y-1.5 text-sm font-semibold">
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-xl font-bold text-white hover:bg-white/10"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/course-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-xl font-bold text-white hover:bg-white/10"
+                >
+                  All Courses
+                </Link>
+                <Link
+                  href="/exam/bitsat"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-xl font-bold text-white hover:bg-white/10"
+                >
+                  BITSAT Prep Hub
+                </Link>
+                <Link
+                  href="/testseries/bitsat-test-series"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-xl font-bold text-white hover:bg-white/10"
+                >
+                  CBT Mock Test Series
+                </Link>
+                <Link
+                  href="/mentorship/bitsat-mentorship"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-xl font-bold text-white hover:bg-white/10"
+                >
+                  1-on-1 Mentorship
+                </Link>
+                <Link
+                  href="/blog"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-xl font-bold text-white hover:bg-white/10"
+                >
+                  Strategy Blog
+                </Link>
+                <Link
+                  href="/about"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-xl font-bold text-white hover:bg-white/10"
+                >
+                  About Us
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-xl font-bold text-white hover:bg-white/10"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
+
             <div className="pt-4 border-t border-purple-900/40">
               <Link
-                href="/login"
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#f43f5e] to-rose-600 text-white font-bold text-center block shadow-lg"
+                href={isAuthenticated ? "/student/dashboard" : "/login"}
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#f43f5e] to-rose-600 text-white font-bold text-center block shadow-lg text-sm"
               >
-                Sign In to Student Portal
+                {isAuthenticated ? "Go to LMS Portal →" : "Sign In to Student Portal"}
               </Link>
             </div>
           </div>
-        )}
-      </header>
+        </div>
+      )}
 
       {/* Floating Expandable WhatsApp Chat Pill on Bottom Right */}
       <a

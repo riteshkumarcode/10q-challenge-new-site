@@ -43,7 +43,11 @@ const NAV_ITEMS = [
   },
 ];
 
-export const StudentSidebar: React.FC = () => {
+interface StudentSidebarProps {
+  onItemClick?: () => void;
+}
+
+export const StudentSidebar: React.FC<StudentSidebarProps> = ({ onItemClick }) => {
   const pathname = usePathname();
   const { user, logout } = useAuth();
 
@@ -93,6 +97,7 @@ export const StudentSidebar: React.FC = () => {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={onItemClick}
                 className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-xs transition-all ${
                   isActive
                     ? 'bg-[#3F328A] text-white shadow-sm'
@@ -111,6 +116,7 @@ export const StudentSidebar: React.FC = () => {
       <div className="p-4 border-t border-[#F1EFFB] space-y-2">
         <Link
           href="/course-all"
+          onClick={onItemClick}
           className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-[#3F328A] bg-[#F0EDFD] hover:bg-[#E2DCFB] transition-colors"
         >
           <span className="flex items-center gap-2">
