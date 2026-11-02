@@ -43,10 +43,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password?: string): Promise<boolean> => {
-    const isSpecialAdmin =
-      email.toLowerCase().includes('admin') || email.toLowerCase().includes('harshal') || email.toLowerCase().includes('ritesh');
+    const isSpecialAdmin = email.toLowerCase().includes('admin');
     const displayName = isSpecialAdmin
-      ? 'Harshal Jain (Admin)'
+      ? 'Master Admin'
       : email.split('@')[0] || 'Student';
     const loggedUser: User = {
       id: isSpecialAdmin ? 1 : Date.now(),
@@ -58,6 +57,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     setUser(loggedUser);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(loggedUser));
+    localStorage.setItem('10q_user', JSON.stringify(loggedUser));
     return true;
   };
 
@@ -73,6 +73,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     setUser(newUser);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newUser));
+    localStorage.setItem('10q_user', JSON.stringify(newUser));
     return true;
   };
 

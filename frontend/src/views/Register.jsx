@@ -21,17 +21,26 @@ export default function Register() {
     e.preventDefault();
     setIsLoading(true);
 
+    const userObj = {
+      fullName,
+      email,
+      phone,
+      role: 'STUDENT',
+      targetExam: 'BITSAT'
+    };
+
     try {
       const res = await apiRegisterUser({ fullName, email, phone, password });
       setIsLoading(false);
-      if (res && res.user) {
-        localStorage.setItem('10q_user', JSON.stringify(res.user));
-      }
-      navigate(fromEnroll ? '/cart' : '/admin');
+      const studentData = (res && res.user) ? { ...res.user, role: 'STUDENT' } : userObj;
+      localStorage.setItem('10q_user', JSON.stringify(studentData));
+      localStorage.setItem('10q_auth_user_fresh_v1', JSON.stringify(studentData));
+      navigate(fromEnroll ? '/cart' : '/student/dashboard');
     } catch (err) {
       setIsLoading(false);
-      localStorage.setItem('10q_user', JSON.stringify({ fullName, email, phone }));
-      navigate(fromEnroll ? '/cart' : '/admin');
+      localStorage.setItem('10q_user', JSON.stringify(userObj));
+      localStorage.setItem('10q_auth_user_fresh_v1', JSON.stringify(userObj));
+      navigate(fromEnroll ? '/cart' : '/student/dashboard');
     }
   };
 

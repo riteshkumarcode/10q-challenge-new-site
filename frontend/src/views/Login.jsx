@@ -31,34 +31,39 @@ export default function Login() {
       const res = await apiLoginUser(email, password);
       setIsLoading(false);
 
-      const isAdmin = email.toLowerCase().includes('admin') || email.toLowerCase().includes('ritesh');
+      const isAdmin = email.toLowerCase().includes('admin');
       const targetRoute = fromEnroll ? '/cart' : (isAdmin ? '/admin' : '/student/dashboard');
+
+      const userObj = {
+        email,
+        fullName: isAdmin ? 'Admin' : (email.split('@')[0] || 'Student'),
+        role: isAdmin ? 'ADMIN' : 'STUDENT'
+      };
 
       if (res && res.respCode === 200) {
         if (res.token) {
           localStorage.setItem('10q_token', res.token);
         }
-        if (res.user) {
-          localStorage.setItem('10q_user', JSON.stringify(res.user));
-        }
+        const studentData = res.user ? res.user : userObj;
+        localStorage.setItem('10q_user', JSON.stringify(studentData));
+        localStorage.setItem('10q_auth_user_fresh_v1', JSON.stringify(studentData));
         navigate(targetRoute);
       } else {
-        localStorage.setItem('10q_user', JSON.stringify({
-          email,
-          fullName: isAdmin ? 'Admin' : (email.split('@')[0] || 'Student'),
-          role: isAdmin ? 'ADMIN' : 'STUDENT'
-        }));
+        localStorage.setItem('10q_user', JSON.stringify(userObj));
+        localStorage.setItem('10q_auth_user_fresh_v1', JSON.stringify(userObj));
         navigate(targetRoute);
       }
     } catch (err) {
       setIsLoading(false);
-      const isAdmin = email.toLowerCase().includes('admin') || email.toLowerCase().includes('ritesh');
+      const isAdmin = email.toLowerCase().includes('admin');
       const targetRoute = fromEnroll ? '/cart' : (isAdmin ? '/admin' : '/student/dashboard');
-      localStorage.setItem('10q_user', JSON.stringify({
+      const fallbackUser = {
         email,
         fullName: isAdmin ? 'Admin' : (email.split('@')[0] || 'Student'),
         role: isAdmin ? 'ADMIN' : 'STUDENT'
-      }));
+      };
+      localStorage.setItem('10q_user', JSON.stringify(fallbackUser));
+      localStorage.setItem('10q_auth_user_fresh_v1', JSON.stringify(fallbackUser));
       navigate(targetRoute);
     }
   };
@@ -67,21 +72,25 @@ export default function Login() {
     if (role === 'admin') {
       setEmail('admin@10qchallenge.in');
       setPassword('admin123');
-      localStorage.setItem('10q_user', JSON.stringify({
+      const adminData = {
         email: 'admin@10qchallenge.in',
-        fullName: 'Ritesh Sharma (Lead Admin)',
+        fullName: 'Lead Admin',
         role: 'ADMIN'
-      }));
+      };
+      localStorage.setItem('10q_user', JSON.stringify(adminData));
+      localStorage.setItem('10q_auth_user_fresh_v1', JSON.stringify(adminData));
       navigate('/admin');
     } else {
       setEmail('student@10qchallenge.in');
       setPassword('student123');
-      localStorage.setItem('10q_user', JSON.stringify({
+      const studentData = {
         email: 'student@10qchallenge.in',
-        fullName: 'Aarav Sharma (Ranker Student)',
+        fullName: 'Student Aspirant',
         role: 'STUDENT',
         targetExam: 'BITSAT'
-      }));
+      };
+      localStorage.setItem('10q_user', JSON.stringify(studentData));
+      localStorage.setItem('10q_auth_user_fresh_v1', JSON.stringify(studentData));
       navigate(fromEnroll ? '/cart' : '/student/dashboard');
     }
   };
