@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from '@/src/compat/router';
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, GraduationCap, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { apiLoginUser } from '../services/api';
 
 export default function Login() {
@@ -68,222 +68,221 @@ export default function Login() {
     }
   };
 
-  const handleQuickLogin = (role) => {
-    if (role === 'admin') {
-      setEmail('admin@10qchallenge.in');
-      setPassword('admin123');
-      const adminData = {
-        email: 'admin@10qchallenge.in',
-        fullName: 'Lead Admin',
-        role: 'ADMIN'
-      };
-      localStorage.setItem('10q_user', JSON.stringify(adminData));
-      localStorage.setItem('10q_auth_user_fresh_v1', JSON.stringify(adminData));
-      navigate('/admin');
-    } else {
-      setEmail('student@10qchallenge.in');
-      setPassword('student123');
-      const studentData = {
-        email: 'student@10qchallenge.in',
-        fullName: 'Student Aspirant',
-        role: 'STUDENT',
-        targetExam: 'BITSAT'
-      };
-      localStorage.setItem('10q_user', JSON.stringify(studentData));
-      localStorage.setItem('10q_auth_user_fresh_v1', JSON.stringify(studentData));
-      navigate(fromEnroll ? '/cart' : '/student/dashboard');
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col justify-center py-0 px-0">
-      <div className="min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-white">
+    <div className="min-h-screen bg-[#0F0C20] flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden font-sans">
+      {/* Dynamic Background Glow Elements */}
+      <div className="absolute top-[-15%] left-[-10%] w-[550px] h-[550px] bg-purple-600/20 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-[-15%] right-[-10%] w-[550px] h-[550px] bg-rose-500/20 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-amber-500/10 rounded-full blur-[160px] pointer-events-none" />
+
+      {/* Main Container Card */}
+      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 bg-white rounded-3xl shadow-2xl border border-slate-200/80 overflow-hidden relative z-10">
         
-        {/* Left Column: Login Illustration Banner */}
-        <div className="hidden lg:flex lg:col-span-6 bg-slate-900 text-white p-12 flex-col justify-center items-center relative overflow-hidden">
-          {/* Background overlay shapes */}
-          <div className="absolute top-10 left-10 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-10 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Left Column: Brand & Benefits Banner */}
+        <div className="hidden lg:flex lg:col-span-5 bg-gradient-to-br from-[#1C143F] via-[#2A1D5E] to-[#120B2E] text-white p-10 flex-col justify-between relative overflow-hidden border-r border-purple-900/30">
+          <div className="absolute -top-24 -right-24 w-60 h-60 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-60 h-60 bg-rose-500/15 rounded-full blur-2xl pointer-events-none" />
 
-          <div className="max-w-md text-center space-y-6 relative z-10">
-            <div className="p-6 bg-slate-950/60 rounded-3xl border border-slate-800 shadow-2xl mb-8 flex items-center justify-center">
-              <img
-                src="/site/assets/img/auth/auth-1.svg"
-                alt="10Q Learning Platform"
-                className="w-80 h-auto object-contain"
-                onError={(e) => {
-                  e.target.src = "/site/assets/img/feature/feature-1.jpg";
-                }}
-              />
+          {/* Top Logo */}
+          <div className="relative z-10">
+            <Link to="/" className="inline-flex items-center space-x-2.5 group">
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-400 to-rose-500 flex items-center justify-center text-slate-950 font-black text-lg shadow-lg group-hover:scale-105 transition-transform">
+                10Q
+              </div>
+              <div>
+                <span className="font-black text-lg tracking-tight text-white block leading-none">
+                  10Q <span className="text-amber-400">CHALLENGE</span>
+                </span>
+                <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">
+                  Student Portal
+                </span>
+              </div>
+            </Link>
+          </div>
+
+          {/* Middle Pitch */}
+          <div className="space-y-4 my-8 relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-amber-300 text-xs font-bold">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Ranker Student Classroom</span>
             </div>
 
-            <div className="space-y-3">
-              <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
-                Welcome to <br />
-                <span className="text-amber-400">10Q Challenge</span> Courses.
-              </h2>
-              <p className="text-slate-300 text-base leading-relaxed">
-                A smart platform for all entrance exams like JEE, BITSAT, VITEEE etc.
-              </p>
+            <h2 className="text-2xl xl:text-3xl font-black text-white leading-tight">
+              Master Your Dream <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-rose-300 to-amber-200">
+                Entrance Exam
+              </span>
+            </h2>
+
+            <p className="text-slate-300 text-xs leading-relaxed">
+              Log in to resume your lectures, practice chapter tests, attempt full-length CBT papers, and resolve your doubts with expert BITSian mentors.
+            </p>
+
+            <div className="space-y-2.5 pt-3">
+              <div className="flex items-center gap-2.5 text-xs text-slate-200">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Full Access to Enrolled Courses &amp; Notes</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs text-slate-200">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Real CBT Exam Simulator &amp; Rank Analytics</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs text-slate-200">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Direct Mentor 1-on-1 Doubt Clarification</span>
+              </div>
             </div>
+          </div>
+
+          {/* Bottom Trust Badge */}
+          <div className="pt-6 border-t border-white/10 relative z-10 flex items-center justify-between text-[11px] text-slate-400">
+            <span>Trusted by 35,000+ Aspirants</span>
+            <span className="text-amber-400 font-bold">BITSAT • JEE • VITEEE</span>
           </div>
         </div>
 
-        {/* Right Column: Login Form Box */}
-        <div className="lg:col-span-6 bg-slate-50 flex flex-col justify-center p-6 sm:p-12 lg:p-16 border-l border-slate-200">
-          <div className="max-w-md w-full mx-auto space-y-8 bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-200">
-            
-            {/* Header: Logo + Back to Home */}
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <Link to="/" className="flex items-center space-x-2">
-                <img
-                  src="/site/assets/logo_yellow.png"
-                  alt="10Q Logo"
-                  className="w-10 h-10 object-contain"
-                />
-                <span className="font-extrabold text-slate-900 text-base tracking-tight">
+        {/* Right Column: Clean Student Sign In Box */}
+        <div className="lg:col-span-7 bg-white p-6 sm:p-10 flex flex-col justify-between">
+          <div>
+            {/* Top Navigation Bar */}
+            <div className="flex items-center justify-between pb-6 border-b border-slate-100">
+              <div className="lg:hidden flex items-center space-x-2">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-400 to-rose-500 flex items-center justify-center text-slate-950 font-black text-sm">
+                  10Q
+                </div>
+                <span className="font-extrabold text-slate-900 text-sm">
                   10Q <span className="text-amber-600">CHALLENGE</span>
                 </span>
-              </Link>
+              </div>
 
               <Link
                 to="/"
-                className="text-xs font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-amber-600 transition-colors ml-auto group"
               >
-                Back to Home
+                <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+                <span>Back to Home</span>
               </Link>
             </div>
 
             {/* From Enroll Notice Banner */}
             {fromEnroll && (
-              <div className="p-4 bg-amber-50 border border-amber-300 text-amber-950 text-xs font-semibold rounded-2xl flex items-start gap-2.5 shadow-sm">
-                <Sparkles className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                <div className="space-y-1">
-                  <div className="font-extrabold text-slate-900 text-sm">Please Sign In to Complete Enrollment</div>
+              <div className="mt-5 p-3.5 bg-amber-50 border border-amber-300 text-amber-950 text-xs font-semibold rounded-2xl flex items-start gap-2.5 shadow-xs">
+                <Sparkles className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <div className="font-extrabold text-slate-900">Sign In to Complete Enrollment</div>
                   <p className="text-slate-700 leading-relaxed font-normal">
-                    You are enrolling in <span className="font-bold text-slate-900">{courseTitle || "Course"}</span>. Sign in below, or click <Link to="/register" state={location.state} className="font-extrabold text-amber-700 underline">Register Now</Link> if you are a new student!
+                    Enrolling in <span className="font-bold text-slate-900">{courseTitle || 'Course'}</span>. Sign in below or{' '}
+                    <Link to="/register" state={location.state} className="font-extrabold text-amber-700 underline">
+                      Register as a new student
+                    </Link>.
                   </p>
                 </div>
               </div>
             )}
 
-            {/* Title */}
-            <div>
+            {/* Heading */}
+            <div className="mt-6 mb-6">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 text-[11px] font-bold mb-2">
+                <GraduationCap className="w-3.5 h-3.5 text-amber-600" />
+                <span>Student Sign In</span>
+              </div>
               <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-                Sign into Your Account
+                Welcome Back!
               </h1>
               <p className="text-slate-500 text-xs mt-1">
-                Enter your registered credentials to access your courses &amp; test series.
+                Enter your registered student credentials to access your courses &amp; test series.
               </p>
             </div>
 
-            {/* Error banner if any */}
+            {/* Error Message Alert */}
             {errorMessage && (
-              <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-600 text-xs font-semibold rounded-xl">
+              <div className="mb-4 p-3 bg-rose-50 border border-rose-200 text-rose-600 text-xs font-semibold rounded-xl">
                 {errorMessage}
               </div>
             )}
 
-            {/* Login Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
-              
-              {/* Email Field */}
+            {/* Sign In Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Email */}
               <div className="space-y-1.5">
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Email <span className="text-rose-500">*</span>
+                  Email Address <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
-                  <Mail className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
                     type="email"
                     required
                     placeholder="student@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 font-medium focus:outline-none focus:border-amber-400 focus:bg-white transition-all"
+                    className="w-full pl-10 pr-4 py-3 bg-slate-50/80 border border-slate-200 rounded-xl text-sm text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white focus:ring-4 focus:ring-amber-500/10 transition-all"
                   />
                 </div>
               </div>
 
-              {/* Password Field */}
+              {/* Password */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Password <span className="text-rose-500">*</span>
-                </label>
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Password <span className="text-rose-500">*</span>
+                  </label>
+                  <Link
+                    to="/forget-password"
+                    className="text-[11px] font-bold text-amber-600 hover:text-amber-700 transition-colors"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
                 <div className="relative">
-                  <Lock className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     required
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-11 pr-11 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 font-medium focus:outline-none focus:border-amber-400 focus:bg-white transition-all"
+                    className="w-full pl-10 pr-11 py-3 bg-slate-50/80 border border-slate-200 rounded-xl text-sm text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none focus:border-amber-500 focus:bg-white focus:ring-4 focus:ring-amber-500/10 transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"
                     aria-label="Toggle password visibility"
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
 
-              {/* Submit Button */}
+              {/* Submit CTA Button */}
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3.5 px-6 bg-slate-900 hover:bg-slate-950 text-amber-400 font-extrabold text-sm rounded-xl shadow-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
+                className="w-full mt-2 py-3.5 px-6 bg-gradient-to-r from-slate-900 to-slate-950 hover:from-amber-600 hover:to-amber-500 text-white hover:text-slate-950 font-extrabold text-sm rounded-xl shadow-lg hover:shadow-amber-500/25 transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
               >
                 {isLoading ? (
-                  <div className="w-5 h-5 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
                 ) : (
                   <>
-                    <span>Login &amp; Continue</span>
+                    <span>Sign In to Student Dashboard</span>
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}
               </button>
-
-              {/* Quick 1-Click Access Buttons */}
-              <div className="pt-2">
-                <div className="flex items-center gap-2 mb-2.5">
-                  <div className="h-px bg-slate-200 flex-grow" />
-                  <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Quick Demo Access</span>
-                  <div className="h-px bg-slate-200 flex-grow" />
-                </div>
-                <div className="grid grid-cols-2 gap-2.5">
-                  <button
-                    type="button"
-                    onClick={() => handleQuickLogin('admin')}
-                    className="py-2.5 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 rounded-xl text-xs font-bold transition-all text-center flex flex-col items-center justify-center"
-                  >
-                    <span>🛡️ Admin Panel</span>
-                    <span className="text-[10px] text-indigo-600 font-normal">Full Management</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleQuickLogin('student')}
-                    className="py-2.5 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-200 rounded-xl text-xs font-bold transition-all text-center flex flex-col items-center justify-center"
-                  >
-                    <span>🎓 Student LMS</span>
-                    <span className="text-[10px] text-emerald-600 font-normal">Classroom &amp; CBT</span>
-                  </button>
-                </div>
-              </div>
-
             </form>
+          </div>
 
-            {/* Footer Signup Prompt */}
-            <div className="pt-4 border-t border-slate-100 text-center text-xs text-slate-600">
-              New student?{' '}
-              <Link to="/register" state={location.state} className="font-extrabold text-amber-600 hover:text-amber-700 ml-1">
-                Register Now
-              </Link>
-            </div>
-
+          {/* Footer Registration Link */}
+          <div className="pt-6 mt-6 border-t border-slate-100 text-center text-xs text-slate-600">
+            Don't have an account yet?{' '}
+            <Link
+              to="/register"
+              state={location.state}
+              className="font-extrabold text-amber-600 hover:text-amber-700 ml-1 underline decoration-2 underline-offset-2"
+            >
+              Register as Student
+            </Link>
           </div>
         </div>
 
@@ -291,4 +290,3 @@ export default function Login() {
     </div>
   );
 }
-
