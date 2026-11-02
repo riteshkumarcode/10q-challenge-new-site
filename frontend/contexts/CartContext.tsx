@@ -41,8 +41,8 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const CART_STORAGE_KEY = '10q_cart_items_v2';
-const COUPON_STORAGE_KEY = '10q_cart_coupon_v2';
+const CART_STORAGE_KEY = '10q_cart_items_fresh_v1';
+const COUPON_STORAGE_KEY = '10q_cart_coupon_fresh_v1';
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -100,40 +100,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
 
   const applyCoupon = (code: string): boolean => {
-    const cleanCode = code.toUpperCase().trim();
-    if (cleanCode === 'BITSAT500') {
-      const c: Coupon = {
-        id: 1,
-        code: 'BITSAT500',
-        discountType: 'FLAT',
-        discountValue: 500,
-        minOrderAmount: 1999,
-        isActive: true,
-      };
-      setAppliedCoupon(c);
-      setCouponCode('BITSAT500');
-      setDiscount(500);
-      setCouponMessage('Coupon BITSAT500 applied! Saved ₹500.');
-      return true;
-    } else if (cleanCode === 'CRACK10Q') {
-      const disc = Math.round((subtotal * 15) / 100);
-      const c: Coupon = {
-        id: 2,
-        code: 'CRACK10Q',
-        discountType: 'PERCENTAGE',
-        discountValue: 15,
-        minOrderAmount: 999,
-        isActive: true,
-      };
-      setAppliedCoupon(c);
-      setCouponCode('CRACK10Q');
-      setDiscount(disc);
-      setCouponMessage('Coupon CRACK10Q applied! Saved 15%.');
-      return true;
-    } else {
-      setCouponMessage('Invalid coupon code.');
-      return false;
-    }
+    setCouponMessage('Invalid or expired coupon code.');
+    return false;
   };
 
   const removeCoupon = () => {

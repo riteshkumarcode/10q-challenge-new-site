@@ -35,6 +35,14 @@ export default function BlogSection({ limit = 3, showHeader = true }) {
         )}
 
         {/* Blog Cards Grid */}
+        {displayedBlogs.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-lg mx-auto shadow-xs space-y-2">
+            <h3 className="text-lg font-extrabold text-slate-900">No Blog Posts Yet</h3>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Articles, preparation strategies, and exam updates will appear here once published.
+            </p>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayedBlogs.map((blog) => (
             <div
@@ -100,6 +108,7 @@ export default function BlogSection({ limit = 3, showHeader = true }) {
             </div>
           ))}
         </div>
+        )}
 
       </div>
     </section>

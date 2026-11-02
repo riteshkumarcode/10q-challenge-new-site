@@ -3,6 +3,7 @@ import { Star, Quote } from 'lucide-react';
 import { testimonialsData } from '../data/testimonials';
 
 export default function TestimonialSlider() {
+  if (!testimonialsData || testimonialsData.length === 0) return null;
   return (
     <section className="py-20 bg-white text-slate-900 relative border-b border-slate-200 overflow-hidden">
       

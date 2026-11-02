@@ -101,6 +101,15 @@ export default function Exam() {
             </h2>
           </div>
 
+          {relatedCourses.length === 0 ? (
+            <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center max-w-md mx-auto shadow-xs space-y-3">
+              <BookOpen className="w-10 h-10 text-amber-500 mx-auto" />
+              <h3 className="text-lg font-extrabold text-slate-900">No {exam.name} Batches Published Yet</h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                New courses for {exam.name} will appear here once published from the Admin Panel.
+              </p>
+            </div>
+          ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {relatedCourses.map((course) => (
               <div
@@ -192,6 +201,7 @@ export default function Exam() {
               </div>
             ))}
           </div>
+          )}
         </div>
       </section>
 

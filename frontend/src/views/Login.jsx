@@ -43,10 +43,9 @@ export default function Login() {
         }
         navigate(targetRoute);
       } else {
-        // Fallback seamless demo authentication
         localStorage.setItem('10q_user', JSON.stringify({
           email,
-          fullName: isAdmin ? 'Ritesh Sharma (Lead Admin)' : 'Aarav Sharma (Ranker Student)',
+          fullName: isAdmin ? 'Admin' : (email.split('@')[0] || 'Student'),
           role: isAdmin ? 'ADMIN' : 'STUDENT'
         }));
         navigate(targetRoute);
@@ -57,7 +56,7 @@ export default function Login() {
       const targetRoute = fromEnroll ? '/cart' : (isAdmin ? '/admin' : '/student/dashboard');
       localStorage.setItem('10q_user', JSON.stringify({
         email,
-        fullName: isAdmin ? 'Ritesh Sharma (Lead Admin)' : 'Aarav Sharma (Ranker Student)',
+        fullName: isAdmin ? 'Admin' : (email.split('@')[0] || 'Student'),
         role: isAdmin ? 'ADMIN' : 'STUDENT'
       }));
       navigate(targetRoute);

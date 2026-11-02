@@ -1,56 +1,56 @@
 export const categoriesData = [
   {
-    id: "jee",
-    name: "JEE",
-    subtitle: "Main & Advanced Prep",
-    icon: "BookOpen",
+    id: 1,
+    name: "JEE (Mains & Adv)",
+    courses: "0 Courses",
+    icon: "/site/assets/img/categories-icon.png",
     slug: "JEE",
-    color: "from-amber-400 to-amber-600",
-    image: "/site/assets/jee.png"
+    tag: "Most Popular",
+    color: "from-blue-500/20 to-indigo-500/20"
   },
   {
-    id: "bitsat",
-    name: "BITSAT",
-    subtitle: "Speed & Accuracy Booster",
-    icon: "Zap",
+    id: 2,
+    name: "BITSAT Prep",
+    courses: "0 Courses",
+    icon: "/site/assets/img/categories-icon-01.png",
     slug: "BITSAT",
-    color: "from-blue-500 to-indigo-600",
-    image: "/site/assets/bitsat.png"
+    tag: "High Scoring",
+    color: "from-amber-500/20 to-orange-500/20"
   },
   {
-    id: "viteee",
+    id: 3,
     name: "VITEEE",
-    subtitle: "VIT Entrance Mastery",
-    icon: "Target",
+    courses: "0 Courses",
+    icon: "/site/assets/img/categories-icon-02.png",
     slug: "VITEEE",
-    color: "from-emerald-400 to-teal-600",
-    image: "/site/assets/viteee.png"
+    tag: "Speed Test",
+    color: "from-emerald-500/20 to-teal-500/20"
   },
   {
-    id: "met",
+    id: 4,
     name: "MET (Manipal)",
-    subtitle: "Manipal Entrance Prep",
-    icon: "Award",
+    courses: "0 Courses",
+    icon: "/site/assets/img/categories-icon-03.png",
     slug: "MET",
-    color: "from-purple-500 to-indigo-600",
-    image: "/site/assets/met.png"
+    tag: "Top Private",
+    color: "from-purple-500/20 to-pink-500/20"
   },
   {
-    id: "comedk",
+    id: 5,
     name: "COMEDK",
-    subtitle: "Karnataka Engineering",
-    icon: "Compass",
+    courses: "0 Courses",
+    icon: "/site/assets/img/categories-icon-04.png",
     slug: "Comedk",
-    color: "from-rose-400 to-pink-600",
-    image: "/site/assets/comedk.png"
+    tag: "Karnataka Top",
+    color: "from-cyan-500/20 to-sky-500/20"
   },
   {
-    id: "board-exam",
-    name: "Board Exam",
-    subtitle: "Class 12th Excellence",
-    icon: "GraduationCap",
-    slug: "BoardExam",
-    color: "from-cyan-400 to-blue-600",
-    image: "/site/assets/board-exam.png"
+    id: 6,
+    name: "Board Exam Booster",
+    courses: "0 Courses",
+    icon: "/site/assets/img/categories-icon-05.png",
+    slug: "CBSE",
+    tag: "Class 11 & 12",
+    color: "from-rose-500/20 to-red-500/20"
   }
 ];

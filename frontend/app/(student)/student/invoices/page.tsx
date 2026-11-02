@@ -55,6 +55,13 @@ export default function StudentInvoicesPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#F1EFFB]">
+              {orders.length === 0 && (
+                <tr>
+                  <td colSpan={6} className="p-8 text-center text-[#6E6990]">
+                    No orders or tax invoices found yet.
+                  </td>
+                </tr>
+              )}
               {orders.map((order) => (
                 <tr key={order.id} className="hover:bg-[#FAFAFD] transition-colors">
                   <td className="p-4 font-mono font-bold text-[#3F328A]">{order.orderNumber}</td>

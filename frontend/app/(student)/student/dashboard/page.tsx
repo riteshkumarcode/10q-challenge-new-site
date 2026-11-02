@@ -108,34 +108,34 @@ export default function StudentDashboardPage() {
             <GraduationCap size={16} className="text-[#3F328A]" />
           </div>
           <div className="text-2xl font-extrabold text-[#17152A]">{courses.length}</div>
-          <span className="text-[10px] text-[#20D66B] font-bold">Active & Enrolled</span>
+          <span className="text-[10px] text-[#20D66B] font-bold">Active &amp; Enrolled</span>
         </div>
 
         <div className="p-5 rounded-2xl bg-white border border-[#E7E3F5] shadow-xs space-y-1">
           <div className="flex items-center justify-between text-[#6E6990]">
-            <span className="text-xs font-semibold">CBT Mocks Taken</span>
+            <span className="text-xs font-semibold">CBT Mocks Available</span>
             <FileQuestion size={16} className="text-[#FF3F68]" />
           </div>
-          <div className="text-2xl font-extrabold text-[#17152A]">4 / 20</div>
-          <span className="text-[10px] text-[#3F328A] font-bold">Avg Score: 294 / 390</span>
+          <div className="text-2xl font-extrabold text-[#17152A]">{tests.length}</div>
+          <span className="text-[10px] text-[#3F328A] font-bold">Practice Tests</span>
         </div>
 
         <div className="p-5 rounded-2xl bg-white border border-[#E7E3F5] shadow-xs space-y-1">
           <div className="flex items-center justify-between text-[#6E6990]">
-            <span className="text-xs font-semibold">Doubts Resolved</span>
+            <span className="text-xs font-semibold">Doubts Submitted</span>
             <HelpCircle size={16} className="text-[#20D66B]" />
           </div>
-          <div className="text-2xl font-extrabold text-[#17152A]">{doubts.length || 2}</div>
-          <span className="text-[10px] text-[#20D66B] font-bold">100% Resolved by Faculty</span>
+          <div className="text-2xl font-extrabold text-[#17152A]">{doubts.length}</div>
+          <span className="text-[10px] text-[#20D66B] font-bold">Faculty Doubt Hub</span>
         </div>
 
         <div className="p-5 rounded-2xl bg-white border border-[#E7E3F5] shadow-xs space-y-1">
           <div className="flex items-center justify-between text-[#6E6990]">
-            <span className="text-xs font-semibold">National Percentile</span>
+            <span className="text-xs font-semibold">Live Sessions</span>
             <Trophy size={16} className="text-[#FFD800]" />
           </div>
-          <div className="text-2xl font-extrabold text-[#17152A]">96.4%</div>
-          <span className="text-[10px] text-[#16A34A] font-bold">BITS Pilani CS Cutoff Range</span>
+          <div className="text-2xl font-extrabold text-[#17152A]">{liveSessions.length}</div>
+          <span className="text-[10px] text-[#16A34A] font-bold">Scheduled Classes</span>
         </div>
       </div>
 

@@ -27,12 +27,7 @@ namespace _10QChallenge.API.Controllers
             var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
             if (user == null)
             {
-                // Demo fallback response
-                return Ok(new
-                {
-                    token = "demo_jwt_token_10q_challenge",
-                    user = new { id = 101, fullName = "Aarav Sharma", email = request.Email, role = "Student" }
-                });
+                return Unauthorized(new { message = "Invalid email or password." });
             }
             return Ok(new
             {

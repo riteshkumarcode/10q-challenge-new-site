@@ -22,17 +22,38 @@ export default function MentorshipDetail({ onAddToCart = () => {} }) {
 
   const plan = getMentorshipBySlug(slug);
 
+  // Update SEO Document Title on Mount
+  useEffect(() => {
+    if (typeof document !== 'undefined' && plan) {
+      document.title = plan.seo?.title || `${plan.title} | 10Q Challenge Mentorship`;
+    }
+  }, [plan]);
+
+  if (!plan) {
+    return (
+      <main className="min-h-screen bg-slate-50 text-slate-900 pt-28 pb-20 flex items-center justify-center px-4">
+        <div className="bg-white rounded-3xl border border-slate-200 p-10 max-w-md w-full text-center shadow-sm space-y-4">
+          <Sparkles className="w-12 h-12 text-amber-500 mx-auto" />
+          <h1 className="text-2xl font-black text-slate-900">Mentorship Program Not Found</h1>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            This mentorship batch is not available or no mentorship programs have been published yet.
+          </p>
+          <Link
+            to="/mentorship"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs rounded-xl shadow-md transition-all"
+          >
+            <span>View Mentorship Programs</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
   // Related mentorship or courses
   const relatedMentorship = mentorshipData
     .filter((m) => m.id !== plan.id)
     .slice(0, 3);
-
-  // Update SEO Document Title on Mount
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.title = plan.seo?.title || `${plan.title} | 10Q Challenge Mentorship`;
-    }
-  }, [plan]);
 
   const handleEnrollNow = () => {
     if (onAddToCart) {

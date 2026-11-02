@@ -22,6 +22,34 @@ export default function CourseDetail({ onAddToCart = () => {} }) {
   // Retrieve course by slug or ID
   const course = getCourseBySlug(slug);
 
+  // SEO Document Title & Meta schema injection
+  useEffect(() => {
+    if (typeof document !== 'undefined' && course) {
+      document.title = course.seo?.title || `${course.title} | 10Q Challenge`;
+    }
+  }, [course]);
+
+  if (!course) {
+    return (
+      <main className="min-h-screen bg-slate-50 text-slate-900 pt-28 pb-20 flex items-center justify-center px-4">
+        <div className="bg-white rounded-3xl border border-slate-200 p-10 max-w-md w-full text-center shadow-sm space-y-4">
+          <BookOpen className="w-12 h-12 text-amber-500 mx-auto" />
+          <h1 className="text-2xl font-black text-slate-900">Course Not Found</h1>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            This course is not available or no courses have been published yet.
+          </p>
+          <Link
+            to="/course-all"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs rounded-xl shadow-md transition-all"
+          >
+            <span>Browse Courses</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
   // Filter related courses (same exam or popular other batches, excluding current course)
   const relatedCourses = coursesData
     .filter((c) => c.id !== course.id)
@@ -31,13 +59,6 @@ export default function CourseDetail({ onAddToCart = () => {} }) {
       return 0;
     })
     .slice(0, 3);
-
-  // SEO Document Title & Meta schema injection
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.title = course.seo?.title || `${course.title} | 10Q Challenge`;
-    }
-  }, [course]);
 
   const handleEnrollNow = () => {
     if (onAddToCart) {

@@ -33,17 +33,17 @@ import {
 } from './assignmentData';
 
 const STORAGE_KEYS = {
-  COURSES: '10q_courses_data',
-  BLOGS: '10q_blogs_data',
-  DOUBTS: '10q_doubts_data',
-  ORDERS: '10q_orders_data',
-  QUESTIONS: '10q_questions_data',
-  TESTS: '10q_tests_data',
-  VIDEOS: '10q_video_master_data',
-  DOCUMENTS: '10q_document_master_data',
-  TEST_SERIES: '10q_test_series_master_data',
-  LIVE_SESSIONS: '10q_live_sessions_master_data',
-  ASSIGNMENTS: '10q_course_assignments_data',
+  COURSES: '10q_courses_data_fresh_v1',
+  BLOGS: '10q_blogs_data_fresh_v1',
+  DOUBTS: '10q_doubts_data_fresh_v1',
+  ORDERS: '10q_orders_data_fresh_v1',
+  QUESTIONS: '10q_questions_data_fresh_v1',
+  TESTS: '10q_tests_data_fresh_v1',
+  VIDEOS: '10q_video_master_data_fresh_v1',
+  DOCUMENTS: '10q_document_master_data_fresh_v1',
+  TEST_SERIES: '10q_test_series_master_data_fresh_v1',
+  LIVE_SESSIONS: '10q_live_sessions_master_data_fresh_v1',
+  ASSIGNMENTS: '10q_course_assignments_data_fresh_v1',
 };
 
 function getFromStorage<T>(key: string, initialData: T): T {

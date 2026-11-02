@@ -65,7 +65,15 @@ export default function Mentorship() {
       {/* Mentorship Plans Grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+          {displayPlans.length === 0 ? (
+            <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center max-w-md mx-auto shadow-xs space-y-3">
+              <Sparkles className="w-10 h-10 text-amber-500 mx-auto" />
+              <h3 className="text-xl font-extrabold text-slate-900">No Mentorship Programs Yet</h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                1-on-1 mentorship programs will appear here once published from the Admin Panel.
+              </p>
+            </div>
+          ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayPlans.map((plan) => (
               <div
@@ -181,6 +189,7 @@ export default function Mentorship() {
               </div>
             ))}
           </div>
+          )}
 
           {/* WhatsApp Counselor Callout Card */}
           <div className="mt-14 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-slate-900 via-[#1e1448] to-slate-900 text-white border border-purple-900/50 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">

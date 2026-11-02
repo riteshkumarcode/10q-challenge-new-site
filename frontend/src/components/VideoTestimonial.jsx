@@ -7,6 +7,8 @@ import VideoModal from './VideoModal';
 export default function VideoTestimonial() {
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(null);
 
+  if (!videoTestimonialsData || videoTestimonialsData.length === 0) return null;
+
   return (
     <section className="py-20 bg-white text-slate-900 relative border-b border-slate-200 overflow-hidden">
       

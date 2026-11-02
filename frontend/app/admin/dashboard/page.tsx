@@ -60,22 +60,22 @@ export default function AdminDashboardPage() {
             </div>
           </div>
           <div className="text-2xl sm:text-3xl font-black text-[#17152A]">
-            ₹{(totalRevenue + 450000).toLocaleString('en-IN')}
+            ₹{totalRevenue.toLocaleString('en-IN')}
           </div>
           <span className="text-xs text-[#16A34A] font-bold flex items-center gap-1">
-            <TrendingUp size={13} /> +18.4% this month
+            <TrendingUp size={13} /> {orders.length} orders processed
           </span>
         </div>
 
         <div className="p-6 rounded-3xl bg-white border border-[#E7E3F5] shadow-xs space-y-2">
           <div className="flex items-center justify-between text-[#6E6990]">
-            <span className="text-xs font-bold uppercase tracking-wider">Active Students</span>
+            <span className="text-xs font-bold uppercase tracking-wider">Total Orders</span>
             <div className="w-8 h-8 rounded-xl bg-[#F0EDFD] text-[#3F328A] flex items-center justify-center">
               <Users size={16} />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-[#17152A]">15,420</div>
-          <span className="text-xs text-[#20D66B] font-bold">● 342 Online Now</span>
+          <div className="text-2xl sm:text-3xl font-black text-[#17152A]">{orders.length}</div>
+          <span className="text-xs text-[#20D66B] font-bold">● Live Portal</span>
         </div>
 
         <div className="p-6 rounded-3xl bg-white border border-[#E7E3F5] shadow-xs space-y-2">
@@ -86,7 +86,7 @@ export default function AdminDashboardPage() {
             </div>
           </div>
           <div className="text-2xl sm:text-3xl font-black text-[#FF3F68]">
-            {pendingDoubts.length || 3}
+            {pendingDoubts.length}
           </div>
           <Link
             href="/admin/doubts"
@@ -104,7 +104,7 @@ export default function AdminDashboardPage() {
             </div>
           </div>
           <div className="text-2xl sm:text-3xl font-black text-[#17152A]">{courses.length}</div>
-          <span className="text-xs text-[#6E6990]">Across 6 Major Exams</span>
+          <span className="text-xs text-[#6E6990]">Published in Catalog</span>
         </div>
       </div>
 

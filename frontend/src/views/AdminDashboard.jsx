@@ -200,18 +200,7 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
 
   // 3. CHAPTER MASTER TABBED STATE
   const [chapterActiveTab, setChapterActiveTab] = useState('Basic Information');
-  const [chapterList, setChapterList] = useState([
-    { id: 1, subject: 'Chemistry', chapterName: 'Alcohols Phenols and Ethers', description: 'Comprehensive study of organic oxygen compounds.', orderNumber: '1', enabled: true },
-    { id: 2, subject: 'Chemistry', chapterName: 'Aldehydes Ketones and Carboxylic Acids', description: 'Carbonyl compounds and reactions.', orderNumber: '2', enabled: true },
-    { id: 3, subject: 'Physics', chapterName: 'Alternating Current', description: 'AC circuits, transformers, and resonance.', orderNumber: '3', enabled: true },
-    { id: 4, subject: 'Chemistry', chapterName: 'Amines', description: 'Nitrogen organic chemistry.', orderNumber: '4', enabled: true },
-    { id: 5, subject: 'Maths', chapterName: 'Application of Derivatives', description: 'Tangents, normals, maxima, and minima.', orderNumber: '5', enabled: true },
-    { id: 6, subject: 'Aptitude', chapterName: 'Aptitude', description: 'General aptitude and quantitative reasoning.', orderNumber: '6', enabled: true },
-    { id: 7, subject: 'Maths', chapterName: 'Area under Curves', description: 'Definite integrals application.', orderNumber: '7', enabled: true },
-    { id: 8, subject: 'Chemistry', chapterName: 'Atomic Structure', description: 'Quantum model, Bohr orbit, and electronic configuration.', orderNumber: '8', enabled: true },
-    { id: 9, subject: 'Physics', chapterName: 'Basics', description: 'Vectors, units, and dimensions.', orderNumber: '9', enabled: true },
-    { id: 10, subject: 'Maths', chapterName: 'Binomial Theorem', description: 'Binomial expansions and general term.', orderNumber: '10', enabled: true }
-  ]);
+  const [chapterList, setChapterList] = useState([]);
 
   const [chapterForm, setChapterForm] = useState({
     id: null,
@@ -258,13 +247,7 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
 
   // 4. CHAPTER TOPIC MASTER TABBED STATE (Matching Screenshots 1 & 2)
   const [topicActiveTab, setTopicActiveTab] = useState('Basic Information'); // 'Basic Information' or 'Table'
-  const [topicList, setTopicList] = useState([
-    { id: 1, subject: 'Physics', chapter: 'Rotational Motion', topicName: 'Torque & Angular Momentum', description: 'Concepts of torque, angular acceleration and conservation of angular momentum.', orderNumber: '1', enabled: true },
-    { id: 2, subject: 'Physics', chapter: 'Electrostatics & Capacitance', topicName: 'Gauss Law & Electric Field', description: 'Electric flux, Gauss theorem applications and surface charge density.', orderNumber: '2', enabled: true },
-    { id: 3, subject: 'Maths', chapter: 'Integration & Calculus', topicName: 'Definite Integrals by Substitution', description: 'Properties of definite integrals and substitution shortcuts.', orderNumber: '3', enabled: true },
-    { id: 4, subject: 'Chemistry', chapter: 'Alcohols Phenols and Ethers', topicName: 'Reimer-Tiemann & Kolbe Reaction', description: 'Preparation and electrophilic substitution of phenols.', orderNumber: '4', enabled: true },
-    { id: 5, subject: 'Chemistry', chapter: 'Aldehydes Ketones and Carboxylic Acids', topicName: 'Aldol Condensation & Cannizzaro', description: 'Nucleophilic addition and condensation reactions of carbonyls.', orderNumber: '5', enabled: true }
-  ]);
+  const [topicList, setTopicList] = useState([]);
 
   const [topicForm, setTopicForm] = useState({
     id: null,
@@ -436,148 +419,7 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
 
   // 7. COURSE MASTER STATE
   const [courseActiveTab, setCourseActiveTab] = useState('Table'); // 'Basic Information' or 'Table'
-  const [courseList, setCourseList] = useState([
-    {
-      id: 1,
-      title: 'BITSAT 2026 Crash Course (Antim Batch)',
-      shortDescription: 'Limited Seats - Complete high-yield preparation designed by BITSians.',
-      description: '<p>The ultimate end-to-end BITSAT preparation package with HD video lectures, chapter notes, and 30+ full mock tests.</p>',
-      exam: 'BITSAT',
-      originalPrice: '14999',
-      discountedPrice: '4999',
-      price: '4,999',
-      expiryDate: '2026-07-31',
-      enrolledStudent: '1420',
-      displayIndex: '1',
-      additionalDetails: 'Includes 1-on-1 mentorship & WhatsApp doubt support group.',
-      image: bannerBitSat2026Crash,
-      bannerImage: bannerBitSat2026Crash,
-      altCourseImage: 'BITSAT 2026 Crash Course Thumbnail',
-      altBannerImage: 'BITSAT 2026 Antim Batch Large Banner',
-      scheduleFile: 'BITSAT_2026_Study_Schedule.pdf',
-      slug: 'bitsat-2026-crash-course',
-      metaTitle: 'BITSAT 2026 Crash Course - Antim Batch | 10Q Challenge',
-      metaDescription: 'Join Antim Batch for BITSAT 2026 with BITSian mentors, video lectures & CBT mock tests.',
-      courseLink: '/course-detail/bitsat-2026-crash-course',
-      isShowInIndex: true,
-      isActive: true,
-      isShowInMentorship: false,
-      isShowInTestSeries: false,
-      mentor: 'Harshal Jain'
-    },
-    {
-      id: 2,
-      title: 'BITSAT 2026 Master Course',
-      shortDescription: 'Course by BITSians for future BITSians with complete video library.',
-      description: '<p>Comprehensive concept mastery across Physics, Chemistry, Maths, and LR & English.</p>',
-      exam: 'BITSAT',
-      originalPrice: '18999',
-      discountedPrice: '6999',
-      price: '6,999',
-      expiryDate: '2026-08-15',
-      enrolledStudent: '2890',
-      displayIndex: '2',
-      additionalDetails: 'Full recorded archive + live problem solving workshops.',
-      image: bannerBitSat2026Master,
-      bannerImage: bannerBitSat2026Master,
-      altCourseImage: 'BITSAT 2026 Master Course Thumbnail',
-      altBannerImage: 'BITSAT Master Banner',
-      scheduleFile: 'BITSAT_Master_Roadmap.pdf',
-      slug: 'bitsat-2026-master-course',
-      metaTitle: 'BITSAT 2026 Master Course Prep | 10Q Challenge',
-      metaDescription: 'Target 350+ in BITSAT 2026 with master concept lectures and DPP solutions.',
-      courseLink: '/course-detail/bitsat-2026-master-course',
-      isShowInIndex: true,
-      isActive: true,
-      isShowInMentorship: false,
-      isShowInTestSeries: true,
-      mentor: 'Kartik V'
-    },
-    {
-      id: 3,
-      title: 'BITSAT 2026 Rapid Revision Course',
-      shortDescription: 'Efficient course for last time high-speed preparation.',
-      description: '<p>Fast-track revision covering top weightage chapters in 45 days.</p>',
-      exam: 'BITSAT',
-      originalPrice: '9999',
-      discountedPrice: '2999',
-      price: '2,999',
-      expiryDate: '2026-06-30',
-      enrolledStudent: '1150',
-      displayIndex: '3',
-      additionalDetails: 'Includes 100 high-yield formula sheets and 15 mock tests.',
-      image: bannerBitSat2026Rapid,
-      bannerImage: bannerBitSat2026Rapid,
-      altCourseImage: 'BITSAT Rapid Revision Thumbnail',
-      altBannerImage: 'BITSAT Rapid Revision Banner',
-      scheduleFile: 'Rapid_Revision_Schedule.pdf',
-      slug: 'bitsat-2026-rapid-revision-course',
-      metaTitle: 'BITSAT 2026 Rapid Revision Pack | 10Q Challenge',
-      metaDescription: 'Score high in BITSAT with 45-day rapid revision sprints.',
-      courseLink: '/course-detail/bitsat-2026-rapid-revision-course',
-      isShowInIndex: true,
-      isActive: true,
-      isShowInMentorship: false,
-      isShowInTestSeries: true,
-      mentor: 'BITSians'
-    },
-    {
-      id: 4,
-      title: 'BITSAT 2027 Champions Course',
-      shortDescription: '2-Year foundation batch for 11th moving to 12th aspirants.',
-      description: '<p>Complete video lectures, mock tests, DPPs, short notes, question bank, and doubt clearance.</p>',
-      exam: 'BITSAT',
-      originalPrice: '24999',
-      discountedPrice: '9999',
-      price: '9,999',
-      expiryDate: '2027-06-30',
-      enrolledStudent: '820',
-      displayIndex: '4',
-      additionalDetails: 'Two years of continuous mentorship and chapter test series.',
-      image: bannerBitSat2027Champions,
-      bannerImage: bannerBitSat2027Champions,
-      altCourseImage: 'BITSAT 2027 Champions Batch Thumbnail',
-      altBannerImage: 'BITSAT 2027 Champions Large Banner',
-      scheduleFile: 'BITSAT_2027_Champions_Plan.pdf',
-      slug: 'bitsat-2027-champions-course',
-      metaTitle: 'BITSAT 2027 Champions 2-Year Program | 10Q Challenge',
-      metaDescription: 'Foundation to advance mastery for BITSAT 2027.',
-      courseLink: '/course-detail/bitsat-2027-champions-course',
-      isShowInIndex: true,
-      isActive: true,
-      isShowInMentorship: true,
-      isShowInTestSeries: true,
-      mentor: 'Harshal Jain'
-    },
-    {
-      id: 5,
-      title: '1-on-1 Personal Mentorship Program by BITSians',
-      shortDescription: 'Personal mentorship + complete course material & weekly video strategy calls.',
-      description: '<p>Dedicated BITS Pilani senior mentor assigned for daily accountability and test analysis.</p>',
-      exam: 'BITSAT',
-      originalPrice: '29999',
-      discountedPrice: '14999',
-      price: '14,999',
-      expiryDate: '2026-08-31',
-      enrolledStudent: '480',
-      displayIndex: '5',
-      additionalDetails: 'Direct 1-on-1 WhatsApp connection with your mentor.',
-      image: bannerBitSat2027Star,
-      bannerImage: bannerBitSat2027Star,
-      altCourseImage: 'BITSAT Mentorship Thumbnail',
-      altBannerImage: 'BITSAT Mentorship Large Banner',
-      scheduleFile: 'Mentorship_Roadmap.pdf',
-      slug: '1-on-1-personal-mentorship-program-by-bitsians',
-      metaTitle: '1-on-1 BITSAT Mentorship Program | 10Q Challenge',
-      metaDescription: 'Get personal guidance from top BITS Pilani rankers.',
-      courseLink: '/mentorship-detail/1-on-1-personal-mentorship-program-by-bitsians',
-      isShowInIndex: true,
-      isActive: true,
-      isShowInMentorship: true,
-      isShowInTestSeries: false,
-      mentor: 'Harshal Jain'
-    }
-  ]);
+  const [courseList, setCourseList] = useState([]);
 
   const defaultCourseForm = {
     id: null,
@@ -653,49 +495,12 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
   // 8. VIDEO MASTER STATE
   const [videoActiveTab, setVideoActiveTab] = useState('Basic Information');
   const [videoCourseFilter, setVideoCourseFilter] = useState('');
-  const [videoList, setVideoList] = useState([
-    {
-      id: 1,
-      course: 'BITSAT 2026 Crash Course (Antim Batch)',
-      subject: 'Physics',
-      chapter: 'Rotational Motion',
-      title: 'Torque & Angular Momentum Full Concept Lecture',
-      description: 'Comprehensive video on rotational dynamics and moment of inertia.',
-      videoLink: 'https://youtube.com/watch?v=sample1',
-      orderNumber: '1',
-      liveVideo: false,
-      enabled: true
-    },
-    {
-      id: 2,
-      course: 'BITSAT 2026 Crash Course (Antim Batch)',
-      subject: 'Chemistry',
-      chapter: 'Alcohols Phenols and Ethers',
-      title: 'Reimer-Tiemann & Kolbe Reaction One Shot',
-      description: 'Full reaction mechanism and short tricks.',
-      videoLink: 'https://youtube.com/watch?v=sample2',
-      orderNumber: '2',
-      liveVideo: true,
-      enabled: true
-    },
-    {
-      id: 3,
-      course: 'BITSAT 2026 Master Course',
-      subject: 'Maths',
-      chapter: 'Integration & Calculus',
-      title: 'Definite Integration Speed Shortcuts',
-      description: 'Solve definite integrals in under 30 seconds.',
-      videoLink: 'https://youtube.com/watch?v=sample3',
-      orderNumber: '3',
-      liveVideo: false,
-      enabled: true
-    }
-  ]);
+  const [videoList, setVideoList] = useState([]);
   const [videoForm, setVideoForm] = useState({
     id: null,
-    course: 'BITSAT 2026 Crash Course (Antim Batch)',
+    course: '',
     subject: 'Physics',
-    chapter: 'Rotational Motion',
+    chapter: '',
     title: '',
     description: '',
     videoLink: '',
@@ -717,9 +522,9 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
     }
     setVideoForm({
       id: null,
-      course: videoForm.course || 'BITSAT 2026 Crash Course (Antim Batch)',
+      course: videoForm.course || '',
       subject: 'Physics',
-      chapter: 'Rotational Motion',
+      chapter: '',
       title: '',
       description: '',
       videoLink: '',
@@ -744,46 +549,12 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
   // 9. DOCUMENT MASTER STATE
   const [docActiveTab, setDocActiveTab] = useState('Basic Information');
   const [docCourseFilter, setDocCourseFilter] = useState('');
-  const [docList, setDocList] = useState([
-    {
-      id: 1,
-      course: 'BITSAT 2026 Crash Course (Antim Batch)',
-      subject: 'Physics',
-      chapter: 'Rotational Motion',
-      title: 'BITSAT Physics Formula Sheet 2026',
-      description: 'Quick reference formulas for mechanics, electrodynamics, modern physics.',
-      fileName: 'Physics_Formula_Sheet.pdf',
-      orderNumber: '1',
-      enabled: true
-    },
-    {
-      id: 2,
-      course: 'BITSAT 2026 Crash Course (Antim Batch)',
-      subject: 'Chemistry',
-      chapter: 'Alcohols Phenols and Ethers',
-      title: 'Organic Chemistry Mind Map & Reaction Flowchart',
-      description: 'All named reactions and reagents summarized.',
-      fileName: 'Organic_Chemistry_Mindmap.pdf',
-      orderNumber: '2',
-      enabled: true
-    },
-    {
-      id: 3,
-      course: 'BITSAT 2026 Master Course',
-      subject: 'Maths',
-      chapter: 'Integration & Calculus',
-      title: 'Calculus High Yield Question Bank with Solutions',
-      description: '100 handpicked questions with step-by-step solutions.',
-      fileName: 'Calculus_Question_Bank.pdf',
-      orderNumber: '3',
-      enabled: true
-    }
-  ]);
+  const [docList, setDocList] = useState([]);
   const [docForm, setDocForm] = useState({
     id: null,
-    course: 'BITSAT 2026 Crash Course (Antim Batch)',
+    course: '',
     subject: 'Physics',
-    chapter: 'Rotational Motion',
+    chapter: '',
     title: '',
     description: '',
     fileName: '',
@@ -804,9 +575,9 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
     }
     setDocForm({
       id: null,
-      course: docForm.course || 'BITSAT 2026 Crash Course (Antim Batch)',
+      course: docForm.course || '',
       subject: 'Physics',
-      chapter: 'Rotational Motion',
+      chapter: '',
       title: '',
       description: '',
       fileName: '',
@@ -828,17 +599,7 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
   };
 
   // 10. COUPON MASTER STATE
-  const [couponList, setCouponList] = useState([
-    { id: 1, code: '24JuneBitsat500', validFrom: '01/Aug/2026', expiryDate: '30/Nov/2026', discount: '0%', usage: '0 / 5' },
-    { id: 2, code: '22JuneBitsat600', validFrom: '22/Jun/2026', expiryDate: '12/Aug/2026', discount: '100%', usage: '10 / 0' },
-    { id: 3, code: '7AugBitstar', validFrom: '07/Aug/2026', expiryDate: '05/Sep/2026', discount: '100%', usage: '5 / 0' },
-    { id: 4, code: 'BIT5', validFrom: '14/Mar/2025', expiryDate: '30/Nov/2025', discount: '1999', usage: '10 / 0' },
-    { id: 5, code: 'BITS25', validFrom: '04/Mar/2026', expiryDate: '21/May/2026', discount: '1500', usage: '1000 / 0' },
-    { id: 6, code: 'BITS2560000', validFrom: '01/Sep/2026', expiryDate: '31/Dec/2026', discount: '1500', usage: '100 / 0' },
-    { id: 7, code: 'BITS20', validFrom: '24/Dec/2025', expiryDate: '21/Jan/2026', discount: '1500', usage: '200 / 0' },
-    { id: 8, code: 'BITS2000', validFrom: '01/Jan/2025', expiryDate: '15/Jan/2026', discount: '2000', usage: '20 / 0' },
-    { id: 9, code: 'BITS1500', validFrom: '01/Jan/2024', expiryDate: '15/Jan/2024', discount: '1500', usage: '40 / 0' }
-  ]);
+  const [couponList, setCouponList] = useState([]);
   const [couponModalOpen, setCouponModalOpen] = useState(false);
   const [couponForm, setCouponForm] = useState({
     id: null,
@@ -1057,43 +818,9 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
   };
 
   // 12. NOTIFICATION STATE & HANDLERS
-  const [siteNotifications, setSiteNotifications] = useState([
-    {
-      id: 1,
-      title: 'BITSAT 2026 Crash Course Antim Batch Live',
-      message: 'Enrollment for Antim batch is now open. Exclusive discount available.',
-      target: 'All Visitors',
-      date: '2026-09-07 10:00 AM'
-    },
-    {
-      id: 2,
-      title: 'System Maintenance Scheduled',
-      message: 'Platform maintenance tonight from 2 AM to 4 AM IST.',
-      target: 'All Users',
-      date: '2026-09-06 08:30 PM'
-    }
-  ]);
+  const [siteNotifications, setSiteNotifications] = useState([]);
 
-  const [studentNotifications, setStudentNotifications] = useState([
-    {
-      id: 1,
-      studentName: 'Rahul Sharma',
-      studentEmail: 'rahul.s@gmail.com',
-      title: 'Mock Test 5 Result Declared',
-      message: 'Your BITSAT Full Syllabus Test 5 scorecard is ready. Score: 312/390.',
-      status: 'Delivered',
-      sentAt: '2026-09-07 09:15 AM'
-    },
-    {
-      id: 2,
-      studentName: 'Priya Verma',
-      studentEmail: 'priya.v@gmail.com',
-      title: 'Doubt Resolved by Mentor',
-      message: 'Mentor Vivek answered your Physics Electromagnetism query.',
-      status: 'Read',
-      sentAt: '2026-09-07 08:45 AM'
-    }
-  ]);
+  const [studentNotifications, setStudentNotifications] = useState([]);
 
   const [siteNotifForm, setSiteNotifForm] = useState({
     title: '',
@@ -1136,132 +863,16 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
   };
 
   // 13. STUDENT INVOICES STATE
-  const [invoiceList, setInvoiceList] = useState([
-    {
-      id: 1,
-      invoiceNo: 'INV-2026-001',
-      invoiceDate: '2026-04-12',
-      studentName: 'Aarav Sharma',
-      coupon: 'BITSAT10',
-      invoiceAmount: '₹4,999',
-      invoiceStatus: 'Paid'
-    },
-    {
-      id: 2,
-      invoiceNo: 'INV-2026-002',
-      invoiceDate: '2026-04-10',
-      studentName: 'Rohan Verma',
-      coupon: '-',
-      invoiceAmount: '₹3,499',
-      invoiceStatus: 'Paid'
-    },
-    {
-      id: 3,
-      invoiceNo: 'INV-2026-003',
-      invoiceDate: '2026-04-08',
-      studentName: 'Ananya Gupta',
-      coupon: 'EARLYBIRD',
-      invoiceAmount: '₹2,999',
-      invoiceStatus: 'Pending'
-    },
-    {
-      id: 4,
-      invoiceNo: 'INV-2026-004',
-      invoiceDate: '2026-04-05',
-      studentName: 'Kunal Patel',
-      coupon: '-',
-      invoiceAmount: '₹4,999',
-      invoiceStatus: 'Paid'
-    },
-    {
-      id: 5,
-      invoiceNo: 'INV-2026-005',
-      invoiceDate: '2026-04-01',
-      studentName: 'Sneha Reddy',
-      coupon: 'SPECIAL20',
-      invoiceAmount: '₹3,999',
-      invoiceStatus: 'Failed'
-    }
-  ]);
+  const [invoiceList, setInvoiceList] = useState([]);
   const [invoiceCriteria, setInvoiceCriteria] = useState('All');
   const [invoiceSearch, setInvoiceSearch] = useState('');
 
   // 14. STUDENT ATTEMPTED TEST STATE
-  const [attemptedTestList, setAttemptedTestList] = useState([
-    {
-      id: 1,
-      studentName: 'Demo Student',
-      courseName: 'System Architect',
-      examName: 'CSPA Exam',
-      marks: '61/390',
-      attemptDate: '2011/04/25'
-    },
-    {
-      id: 2,
-      studentName: 'Rahul Sharma',
-      courseName: 'BITSAT Antim Crash Course',
-      examName: 'BITSAT Full Syllabus Mock 1',
-      marks: '312/390',
-      attemptDate: '2026/09/01'
-    },
-    {
-      id: 3,
-      studentName: 'Priya Verma',
-      courseName: 'BITSAT 2026 Master Course',
-      examName: 'Physics Chapter Test - Electromagnetism',
-      marks: '85/100',
-      attemptDate: '2026-09-03'
-    },
-    {
-      id: 4,
-      studentName: 'Amit Kumar',
-      courseName: 'JEE Main 2026 Mastery',
-      examName: 'Maths Full Mock Test 3',
-      marks: '240/300',
-      attemptDate: '2026-09-05'
-    }
-  ]);
+  const [attemptedTestList, setAttemptedTestList] = useState([]);
   const [attemptedTestSearch, setAttemptedTestSearch] = useState('');
 
   // 15. STUDENT DOUBTS STATE
-  const [doubtList, setDoubtList] = useState([
-    {
-      id: 1,
-      doubtText: 'If search box value is clear then page 1 of category showing error when total results are less than limit or pagination is reset.',
-      studentName: 'Pradeep Nanda',
-      module: 'Video - Binomial Theorem',
-      date: '24/Dec/2024 13:46',
-      status: 'Pending',
-      reply: ''
-    },
-    {
-      id: 2,
-      doubtText: 'In Q14 2020 question paper option c is correct or a? In solution option c is given but formula shows option a.',
-      studentName: 'Rahul Sharma',
-      module: 'Video - Binomial Theorem',
-      date: '20/Dec/2024 15:30',
-      status: 'Pending',
-      reply: ''
-    },
-    {
-      id: 3,
-      doubtText: 'How to tackle negative marking in BITSAT English section when 2 options look very similar?',
-      studentName: 'Ananya Gupta',
-      module: 'Video - Chemistry Thermodynamics',
-      date: '07/May/2024 18:54',
-      status: 'Answered',
-      reply: 'Focus on contextual tone and elimination strategy.'
-    },
-    {
-      id: 4,
-      doubtText: 'What is the cutoff for BITS Pilani CS branch in 2025 round 1 counselling?',
-      studentName: 'Vikram Singh',
-      module: 'Video - Physics Laws of Motion',
-      date: '20/Aug/2024 10:22',
-      status: 'Answered',
-      reply: 'Cutoff score was 331 marks for Computer Science.'
-    }
-  ]);
+  const [doubtList, setDoubtList] = useState([]);
   const [doubtSearch, setDoubtSearch] = useState('');
   const [selectedDoubt, setSelectedDoubt] = useState(null);
   const [doubtReplyInput, setDoubtReplyInput] = useState('');
@@ -1686,24 +1297,24 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
                       <Receipt className="w-4 h-4" />
                     </div>
                   </div>
-                  <div className="text-2xl sm:text-3xl font-black text-slate-900">₹18,42,800</div>
+                  <div className="text-2xl sm:text-3xl font-black text-slate-900">₹0</div>
                   <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold mt-2">
                     <TrendingUp className="w-3.5 h-3.5" />
-                    <span>+24.6% vs last month</span>
+                    <span>{invoiceList.length} total invoices</span>
                   </div>
                 </div>
 
                 <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs hover:shadow-md transition-all">
                   <div className="flex items-center justify-between text-slate-500 mb-3">
-                    <span className="text-xs font-bold uppercase tracking-wider">Active Enrolled Learners</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">Active Courses</span>
                     <div className="w-9 h-9 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
                       <GraduationCap className="w-4 h-4" />
                     </div>
                   </div>
-                  <div className="text-2xl sm:text-3xl font-black text-slate-900">4,892</div>
+                  <div className="text-2xl sm:text-3xl font-black text-slate-900">{courseList.length}</div>
                   <div className="flex items-center gap-1.5 text-xs text-indigo-600 font-bold mt-2">
                     <CheckCircle className="w-3.5 h-3.5" />
-                    <span>+380 new this week</span>
+                    <span>Published in catalog</span>
                   </div>
                 </div>
 
@@ -1714,24 +1325,24 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
                       <FileCheck className="w-4 h-4" />
                     </div>
                   </div>
-                  <div className="text-2xl sm:text-3xl font-black text-slate-900">18,450</div>
+                  <div className="text-2xl sm:text-3xl font-black text-slate-900">{attemptedTestList.length}</div>
                   <div className="flex items-center gap-1.5 text-xs text-amber-600 font-bold mt-2">
                     <Award className="w-3.5 h-3.5" />
-                    <span>Avg score 268/390 (BITSAT)</span>
+                    <span>{objectiveQuestionList.length + numericalQuestionList.length} questions in bank</span>
                   </div>
                 </div>
 
                 <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs hover:shadow-md transition-all">
                   <div className="flex items-center justify-between text-slate-500 mb-3">
-                    <span className="text-xs font-bold uppercase tracking-wider">Faculty Doubt Resolution</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">Student Doubts</span>
                     <div className="w-9 h-9 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
                       <MessageSquare className="w-4 h-4" />
                     </div>
                   </div>
-                  <div className="text-2xl sm:text-3xl font-black text-slate-900">98.4%</div>
+                  <div className="text-2xl sm:text-3xl font-black text-slate-900">{doubtList.length}</div>
                   <div className="flex items-center gap-1.5 text-xs text-rose-600 font-bold mt-2">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Avg reply SLA: 3.8 hours</span>
+                    <span>{doubtList.filter(d => d.status === 'Pending').length} pending resolution</span>
                   </div>
                 </div>
               </div>
@@ -1836,7 +1447,7 @@ export default function AdminDashboard({ initialTab = 'Exam Master' }) {
                 <h3 className="font-extrabold text-base text-slate-900">Academic Master Modules Hub</h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                   {[
-                    { title: 'Course Master', desc: '6 Batches', tab: 'Course Master', icon: BookOpen, color: 'bg-indigo-50 text-indigo-700 border-indigo-200' },
+                    { title: 'Course Master', desc: `${courseList.length} Batches`, tab: 'Course Master', icon: BookOpen, color: 'bg-indigo-50 text-indigo-700 border-indigo-200' },
                     { title: 'Question Bank', desc: 'MCQ & Numerical', tab: 'Objective Question', icon: HelpCircle, color: 'bg-amber-50 text-amber-700 border-amber-200' },
                     { title: 'Video Lectures', desc: 'Vimeo Streams', tab: 'Video Master', icon: Video, color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
                     { title: 'Document PDFs', desc: 'Notes & Formulae', tab: 'Document Master', icon: FileText, color: 'bg-blue-50 text-blue-700 border-blue-200' },

@@ -14,7 +14,35 @@ export default function BlogDetail() {
   const [isCopied, setIsCopied] = useState(false);
 
   // Retrieve current blog
-  const blog = blogsData.find((b) => b.slug === slug || String(b.id) === slug) || blogsData[0];
+  const blog = blogsData.find((b) => b.slug === slug || String(b.id) === slug) || blogsData[0] || null;
+
+  // SEO Document Title update
+  useEffect(() => {
+    if (typeof document !== 'undefined' && blog) {
+      document.title = `${blog.title} | 10Q Challenge`;
+    }
+  }, [blog]);
+
+  if (!blog) {
+    return (
+      <main className="min-h-screen bg-slate-50 text-slate-900 pt-28 pb-20 flex items-center justify-center px-4">
+        <div className="bg-white rounded-3xl border border-slate-200 p-10 max-w-md w-full text-center shadow-sm space-y-4">
+          <BookOpen className="w-12 h-12 text-amber-500 mx-auto" />
+          <h1 className="text-2xl font-black text-slate-900">Article Not Found</h1>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            This blog post is not available or no articles have been published yet.
+          </p>
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs rounded-xl shadow-md transition-all"
+          >
+            <span>Back to Blogs</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </main>
+    );
+  }
 
   // Dynamic reading time calculation
   const wordCount = (blog.contentHtml || blog.description || '').replace(/<[^>]*>/g, '').split(/\s+/).length;
@@ -31,14 +59,7 @@ export default function BlogDetail() {
     .slice(0, 4);
 
   // Featured Recommended Course for Sidebar
-  const featuredCourse = coursesData.find((c) => c.exam.toLowerCase() === blog.category.toLowerCase()) || coursesData[0];
-
-  // SEO Document Title update
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.title = `${blog.title} | 10Q Challenge`;
-    }
-  }, [blog]);
+  const featuredCourse = coursesData.find((c) => c.exam.toLowerCase() === blog.category.toLowerCase()) || coursesData[0] || null;
 
   const handleCopyLink = () => {
     if (typeof window !== 'undefined') {
@@ -321,6 +342,7 @@ export default function BlogDetail() {
           <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
             
             {/* Sidebar Card 1: Featured Recommended Course */}
+            {featuredCourse && (
             <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-md space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-black text-slate-950 bg-amber-400 px-3 py-1 rounded-full uppercase tracking-wider shadow-xs">
@@ -380,6 +402,7 @@ export default function BlogDetail() {
                 </Link>
               </div>
             </div>
+            )}
 
             {/* Sidebar Card 2: Free Academic Counseling on WhatsApp */}
             <div className="bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white rounded-3xl p-6 border border-emerald-800/50 shadow-md space-y-4">

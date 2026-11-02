@@ -23,7 +23,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const STORAGE_KEY = '10q_auth_user';
+const STORAGE_KEY = '10q_auth_user_fresh_v1';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -34,18 +34,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         setUser(JSON.parse(stored));
-      } else {
-        // Default guest/demo student
-        const defaultStudent: User = {
-          id: 101,
-          fullName: 'Aarav Sharma',
-          email: 'student@10qchallenge.in',
-          mobileNumber: '+91 98765 43210',
-          role: 'STUDENT',
-          targetExam: 'BITSAT',
-        };
-        setUser(defaultStudent);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultStudent));
       }
     } catch (e) {
       console.error(e);
@@ -57,11 +45,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = async (email: string, password?: string): Promise<boolean> => {
     const isSpecialAdmin =
       email.toLowerCase().includes('admin') || email.toLowerCase().includes('harshal') || email.toLowerCase().includes('ritesh');
+    const displayName = isSpecialAdmin
+      ? 'Harshal Jain (Admin)'
+      : email.split('@')[0] || 'Student';
     const loggedUser: User = {
       id: isSpecialAdmin ? 1 : Date.now(),
-      fullName: isSpecialAdmin ? 'Harshal Jain (Lead Admin)' : 'Aarav Sharma',
+      fullName: displayName,
       email: email,
-      mobileNumber: '+91 98765 43210',
       role: isSpecialAdmin ? 'ADMIN' : 'STUDENT',
       targetExam: 'BITSAT',
     };

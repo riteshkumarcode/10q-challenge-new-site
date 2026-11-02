@@ -34,6 +34,22 @@ export default function MyCoursesPage() {
         </p>
       </div>
 
+      {courses.length === 0 ? (
+        <div className="bg-white rounded-3xl border border-[#E7E3F5] p-12 text-center max-w-md mx-auto shadow-xs space-y-3">
+          <BookOpen size={36} className="text-[#3F328A] mx-auto" />
+          <h3 className="font-extrabold text-base text-[#17152A]">No Enrolled Courses Yet</h3>
+          <p className="text-xs text-[#6E6990] leading-relaxed">
+            You have not enrolled in any courses yet. Browse our catalog to start learning.
+          </p>
+          <Link
+            href="/course-all"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#3F328A] text-white font-bold text-xs"
+          >
+            <span>Browse Courses</span>
+            <ArrowRight size={14} />
+          </Link>
+        </div>
+      ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {courses.map((course) => (
           <div
@@ -81,6 +97,7 @@ export default function MyCoursesPage() {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 }

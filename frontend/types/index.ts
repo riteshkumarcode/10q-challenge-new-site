@@ -230,6 +230,11 @@ export interface Exam {
   description: string;
   totalMarks?: number;
   durationMinutes?: number;
+  conductingBody?: string;
+  examDate?: string;
+  totalQuestions?: number;
+  markingScheme?: string;
+  syllabusHighlights?: string[];
 }
 
 // ============================================================================

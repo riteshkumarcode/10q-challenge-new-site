@@ -31,6 +31,15 @@ export default function FeaturedCoursesSection({ limit = 6 }) {
         </div>
 
         {/* Course Cards Grid */}
+        {displayedCourses.length === 0 ? (
+          <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center max-w-lg mx-auto shadow-xs space-y-3">
+            <BookOpen className="w-10 h-10 text-amber-500 mx-auto" />
+            <h3 className="text-lg font-extrabold text-slate-900">No Courses Available Yet</h3>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Courses and batches will appear here once they are created and published from the Admin Panel.
+            </p>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayedCourses.map((course) => (
             <div
@@ -136,6 +145,7 @@ export default function FeaturedCoursesSection({ limit = 6 }) {
             </div>
           ))}
         </div>
+        )}
 
       </div>
     </section>

@@ -98,6 +98,15 @@ export default function StudentTestsHubPage() {
       </div>
 
       {/* Test Papers Grid */}
+      {filteredTests.length === 0 ? (
+        <div className="bg-white rounded-3xl border border-[#E7E3F5] p-12 text-center max-w-md mx-auto shadow-xs space-y-3">
+          <FileQuestion size={36} className="text-[#3F328A] mx-auto" />
+          <h3 className="font-extrabold text-base text-[#17152A]">No CBT Mock Tests Available</h3>
+          <p className="text-xs text-[#6E6990] leading-relaxed">
+            CBT mock tests will appear here once assigned to your course from the Admin Panel.
+          </p>
+        </div>
+      ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredTests.map((test) => (
           <div
@@ -143,6 +152,7 @@ export default function StudentTestsHubPage() {
           </div>
         ))}
       </div>
+      )}
     </div>
   );
 }

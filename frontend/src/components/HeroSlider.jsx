@@ -22,19 +22,7 @@ export default function HeroSlider() {
     return () => clearInterval(timer);
   }, [banners.length]);
 
-  // Featured course card matching the reference screenshot
-  const featuredCourse = coursesData[0] || {
-    id: 1,
-    title: "BITSAT Ultimate Crash Course 2026",
-    exam: "BITSAT",
-    tag: "BEST SELLER",
-    price: 3999,
-    originalPrice: 7999,
-    discount: "50% OFF",
-    duration: "60 Days",
-    tests: "25 Full Length Mock Tests",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600"
-  };
+  const featuredCourse = coursesData[0] || null;
 
   return (
     <section className="relative bg-[#2b1f63] text-white pt-24 pb-16 lg:pt-28 lg:pb-20 overflow-hidden">
@@ -132,74 +120,88 @@ export default function HeroSlider() {
           {/* Right Column: Featured White Card inside Dark Frame */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-md">
-              
               {/* Outer Dark Indigo Frame Glow effect matching screenshot */}
               <div className="absolute -inset-2 bg-[#1b143c] rounded-[2.2rem] shadow-2xl border border-purple-900/50 transform rotate-1 scale-[1.01]"></div>
-              
-              {/* Main White Featured Course Card */}
-              <div className="relative bg-white text-slate-900 rounded-[2rem] p-5 sm:p-6 shadow-2xl border border-slate-100 z-10">
-                
-                {/* BEST SELLER Tag */}
-                <div className="inline-block bg-amber-100/90 text-amber-900 font-extrabold text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 shadow-xs">
-                  {featuredCourse.tag || "BEST SELLER"}
-                </div>
 
-                {/* Course Image */}
-                <div className="relative h-48 sm:h-52 rounded-2xl overflow-hidden mb-4 bg-slate-900 shadow-inner group">
-                  <img
-                    src={featuredCourse.image}
-                    alt={featuredCourse.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* BITSAT Badge on Top Left */}
-                  <span className="absolute top-3 left-3 bg-slate-950/90 backdrop-blur-xs text-amber-400 text-xs font-black px-3 py-1 rounded-lg tracking-wider uppercase shadow-md border border-amber-400/20">
-                    {featuredCourse.exam || "BITSAT"}
-                  </span>
-                </div>
+              {featuredCourse ? (
+                /* Main White Featured Course Card */
+                <div className="relative bg-white text-slate-900 rounded-[2rem] p-5 sm:p-6 shadow-2xl border border-slate-100 z-10">
+                  <div className="inline-block bg-amber-100/90 text-amber-900 font-extrabold text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 shadow-xs">
+                    {featuredCourse.tag || "FEATURED"}
+                  </div>
 
-                {/* Course Title */}
-                <h3 className="font-extrabold text-slate-900 text-base sm:text-lg mb-3 leading-snug">
-                  {featuredCourse.title}
-                </h3>
-
-                {/* Metadata Line */}
-                <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-500 mb-5 pb-4 border-b border-slate-100">
-                  <span className="flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-slate-400" />
-                    {featuredCourse.duration}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <FileText className="w-4 h-4 text-slate-400" />
-                    {featuredCourse.tests}
-                  </span>
-                </div>
-
-                {/* Price and Enroll Button Row */}
-                <div className="flex items-end justify-between">
-                  <div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-2xl font-black text-slate-900">
-                        ₹{featuredCourse.price}
-                      </span>
-                      <span className="text-xs text-slate-400 line-through font-medium">
-                        ₹{featuredCourse.originalPrice}
-                      </span>
-                    </div>
-                    <span className="text-[11px] font-bold text-emerald-600 block mt-0.5">
-                      {featuredCourse.discount} applied
+                  <div className="relative h-48 sm:h-52 rounded-2xl overflow-hidden mb-4 bg-slate-900 shadow-inner group">
+                    <img
+                      src={featuredCourse.image}
+                      alt={featuredCourse.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <span className="absolute top-3 left-3 bg-slate-950/90 backdrop-blur-xs text-amber-400 text-xs font-black px-3 py-1 rounded-lg tracking-wider uppercase shadow-md border border-amber-400/20">
+                      {featuredCourse.exam || "BITSAT"}
                     </span>
                   </div>
 
-                  <Link
-                    to={`/course/${featuredCourse.slug || "bitsat-ultimate-crash-course-2026"}`}
-                    className="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition-all flex items-center gap-1.5 shadow-md hover:scale-105 active:scale-95 cursor-pointer"
-                  >
-                    <span>View Course</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
+                  <h3 className="font-extrabold text-slate-900 text-base sm:text-lg mb-3 leading-snug">
+                    {featuredCourse.title}
+                  </h3>
 
-              </div>
+                  <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-slate-500 mb-5 pb-4 border-b border-slate-100">
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-4 h-4 text-slate-400" />
+                      {featuredCourse.duration}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <FileText className="w-4 h-4 text-slate-400" />
+                      {featuredCourse.tests}
+                    </span>
+                  </div>
+
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-2xl font-black text-slate-900">
+                          ₹{featuredCourse.price}
+                        </span>
+                        <span className="text-xs text-slate-400 line-through font-medium">
+                          ₹{featuredCourse.originalPrice}
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-bold text-emerald-600 block mt-0.5">
+                        {featuredCourse.discount} applied
+                      </span>
+                    </div>
+
+                    <Link
+                      to={`/course/${featuredCourse.slug || featuredCourse.id}`}
+                      className="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl transition-all flex items-center gap-1.5 shadow-md hover:scale-105 active:scale-95 cursor-pointer"
+                    >
+                      <span>View Course</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <div className="relative bg-white text-slate-900 rounded-[2rem] p-8 shadow-2xl border border-slate-100 z-10 text-center space-y-4">
+                  <div className="inline-block bg-amber-100/90 text-amber-900 font-extrabold text-[11px] px-3.5 py-1 rounded-full uppercase tracking-wider shadow-xs">
+                    10Q CHALLENGE LMS
+                  </div>
+                  <h3 className="font-extrabold text-slate-900 text-xl leading-snug">
+                    No Courses Published Yet
+                  </h3>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    Our new batches, test series, and mentorship programs will appear here as soon as they are published.
+                  </p>
+                  <div className="pt-2">
+                    <Link
+                      to="/course-all"
+                      className="inline-flex items-center justify-center gap-1.5 bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-md"
+                    >
+                      <span>Explore Catalog</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
